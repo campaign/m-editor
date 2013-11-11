@@ -1,49 +1,43 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="M-editor : 智能手机端的所见即所得编辑器" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>M-editor</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/campaign/m-editor">View on GitHub</a>
-
-          <h1 id="project_title">M-editor</h1>
-          <h2 id="project_tagline">智能手机端的所见即所得编辑器</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/campaign/m-editor/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/campaign/m-editor/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>test</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">M-editor maintained by <a href="https://github.com/campaign">campaign</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <title>M-Editor演示</title>
+    <style>
+        .editor_input {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            -webkit-appearance: none;
+            -webkit-border-radius: 3px;
+            width: 100%;
+            padding: 10px;
+            -webkit-box-sizing: border-box;
+            display: block;
+            font-size: 14px;
+            border: 1px solid #c6c6c6;
+            border-bottom: 1px solid #eaeaea;
+            font-weight: 600;
+            color: #999;
+            box-shadow: 0 0 5px #dfdfdf inset;
+            background: #fbfbfb
+        }
+        .editor_input p{
+            margin:0;
+            padding:0;
+        }
+    </style>
+    <script src="zepto.js"></script>
+    <script src="umeditor.config.js"></script>
+    <script src="editor_api.js"></script>
+    <script src="lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+<h1>M-Editor演示</h1>
+<div style="width:100%;min-height:80px;" class="editor_input" id="editor"></div>
+</body>
+<script>
+    var editor = new UM.Editor();
+    editor.render('editor')
+</script>
 </html>
