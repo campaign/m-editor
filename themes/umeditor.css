@@ -1,0 +1,30 @@
+.edui-btn {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    overflow: hidden;
+    background: url(./images/icons.png) no-repeat;
+    -webkit-background-size: auto 30px;
+}
+.edui-btn-photo {
+    background-position: 0px 0px;
+}
+.edui-btn-camera {
+    background-position: -30px 0px;
+}
+.edui-btn-record {
+    background-position: -60px 0px;
+}
+.edui-btn-emotion {
+    background-position: -90px 0px;
+}
+.edui-btn-remind {
+    background-position: -120px 0px;
+}
+.edui-btn input[type=file]{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    opacity: 0;
+    font-size: 30px;
+}

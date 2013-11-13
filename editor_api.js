@@ -15,7 +15,9 @@
             'core/filterword.js',
             'core/node.js',
             'core/htmlparser.js',
-            'core/filternode.js'
+            'core/filternode.js',
+            'plugins/inserthtml.js',
+            'plugins/dropfile.js'
         ],
         baseURL = 'src/';
     for (var i=0,pi;pi = paths[i++];) {

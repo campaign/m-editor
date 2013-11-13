@@ -26,18 +26,31 @@
             margin:0;
             padding:0;
         }
+        .editor_menu {
+            margin-top: 5px;
+            text-align:right;
+        }
     </style>
     <script src="zepto.js"></script>
     <script src="umeditor.config.js"></script>
     <script src="editor_api.js"></script>
     <script src="lang/zh-cn/zh-cn.js"></script>
+    <link rel="stylesheet" href="./themes/umeditor.css"/>
 </head>
 <body>
+
 <h1>M-Editor演示</h1>
-<div style="width:100%;min-height:80px;" class="editor_input" id="editor"></div>
+<div style="width:100%;min-height:80px;" class="editor_input" id="editor">13246578901234567890</div>
+<div class="editor_menu">
+    <a href="javascript:void(0)" class="edui-btn edui-btn-photo"><input type="file" name="photo" id="photo" accept="image/*" multiple="multiple" /></a>
+    <a href="javascript:void(0)" class="edui-btn edui-btn-camera"><input type="file" name="camera" id="camera" accept="image/*" /></a>
+    <a href="javascript:void(0)" class="edui-btn edui-btn-record"><!--<input type="file" name="record" id="record" accept="audio/*" />--></a>
+    <a href="javascript:void(0)" class="edui-btn edui-btn-emotion"></a>
+    <a href="javascript:void(0)" class="edui-btn edui-btn-remind"></a>
+</div>
+<div id="message"></div>
+
+<script src="test.js"></script>
+
 </body>
-<script>
-    var editor = new UM.Editor();
-    editor.render('editor')
-</script>
 </html>
