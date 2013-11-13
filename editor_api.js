@@ -17,7 +17,9 @@
             'core/htmlparser.js',
             'core/filternode.js',
             'plugins/inserthtml.js',
-            'plugins/dropfile.js'
+            'plugins/dropfile.js',
+            'plugins/insertimages.js',
+            'plugins/cursor.js'
         ],
         baseURL = 'src/';
     for (var i=0,pi;pi = paths[i++];) {
