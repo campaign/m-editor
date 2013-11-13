@@ -23,7 +23,11 @@ $('.edui-btn-photo input[type=file],.edui-btn-camera input[type=file]').change(f
                         contentType:false,
                         processData:false,
                         success:function(data){
-                            alert('res: ' + data);
+                            $('#message').html('response: ' + data);
+                            var picLink = me.getOpt('imagePath') + data;
+                            if(picLink) {
+                                me.execCommand('inserthtml', '<img src="' + picLink + '" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;">');
+                            }
                         }
                     })
 
