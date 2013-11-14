@@ -16,7 +16,7 @@ UM.plugins['imageslider'] = function () {
         init: function () {
             var _this = this;
 
-            this.$sliderContainer = $('<div>').css({ width: '100%', height: '100%' });
+            this.$sliderContainer = $('<div>').css({ width: $(me.window).width(), height: $(me.window).height() - 36 });
 
             var $backIcon = $('<a class="ui-icon-back">返回</a>'),
                 $pageBar = $('<span class="ui-pagebar">1/4</span>'),
@@ -40,7 +40,7 @@ UM.plugins['imageslider'] = function () {
                 }
             });
 
-            this.$sliderWrapper = $('<div>').css({
+            this.$sliderWrapper = $('<div class="edui-slider-wrapper">').css({
                 'z-index': (me.getOpt('zIndex') + 1),position: 'absolute', top: '0', left: '0', width: '100%', height: '100%'
             }).hide();
             this.$sliderWrapper.hide().appendTo(document.body);
@@ -48,30 +48,34 @@ UM.plugins['imageslider'] = function () {
             this.$sliderWrapper.append(this.$sliderContainer);
 
             this.$pageBar = $pageBar;
-
         },
         reset: function () {
-            var $pageBar = this.$pageBar,
+            var _this = this,
                 $sider = this.$sliderContainer;
 
             $sider.html('');
             me.$body.find('img.slider').each(function () {
-                $('<div><img src="' + $(this).attr('src') + '" /></div>').appendTo($sider);
+                $('<div><img width="' + $(me.window).width() + '" src="' + $(this).attr('src') + '" /></div>').appendTo($sider);
             });
 
             $sider.slider({
                 slide: function () {
-                    $pageBar.text( ($sider.slider('getIndex') + 1) + '/' + me.$body.find('img.slider').length );
+                    _this.updatePageBar();
                 },
                 ready: function () {
-                    $sider.find('.ui-slider-item img').each(function () {
+                    _this.updatePageBar();
+                    function updataImg(){
                         var $img = $(this),
                             marginTop = ($img.parent().height() - $img.height()) / 2;
                         $img.css({'margin': (marginTop > 0 ? marginTop : 0) + 'px auto'});
-                    });
+                    }
+                    $sider.find('.ui-slider-item img').on('load', updataImg).each(updataImg);
                 }
             });
             $sider.slider('slideTo', slideToIndex);
+        },
+        updatePageBar:function () {
+            this.$pageBar.text( (this.$sliderContainer.slider('getIndex') + 1) + '/' + me.$body.find('img.slider').length );
         },
         show: function () {
             this.$sliderWrapper.show();

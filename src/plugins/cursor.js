@@ -17,7 +17,6 @@ UM.plugins.cursor = function(){
         clearTimeout(showtimer);
         showtimer = setTimeout(function(){
             var offset = getOffset();
-            console.log('top:' + offset.top + ' left:' + offset.left)
             me.fireEvent('showpopup',offset.top,offset.left)
         },1000)
     });

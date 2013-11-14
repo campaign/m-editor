@@ -47,10 +47,14 @@
     border: 1px #a6a6a6 solid;
     background-color: #f2f2f2;
 }
+.edui-slider-wrapper{
+    overflow: hidden;
+    background-color: #666666;
+}
 
 /* slider幻灯的样式 */
 .ui-slider{
-    background:#666666;
+    height: 100%;
 }
 .ui-slider .ui-slider-group {
     width: 100%;

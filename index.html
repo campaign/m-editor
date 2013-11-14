@@ -26,9 +26,22 @@
             margin:0;
             padding:0;
         }
-        .editor_menu {
-            margin-top: 5px;
-            text-align:right;
+        .editor_toolbar {
+            text-align: right;
+        }
+        .editor_submit {
+            position: relative;
+            right: 0px;
+            margin-top: 4px;
+            padding: 0 10px;
+            line-height: 30px;
+            display: inline-block;
+            text-decoration: none;
+            border: 1px solid #1e84db;
+            background: #2d90e4;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 3px #bfc2c6;
         }
     </style>
     <script src="zepto.js"></script>
@@ -45,7 +58,7 @@
 
 <h1>M-Editor演示</h1>
 <div style="width:100%;min-height:80px;" class="editor_input" id="editor">adasdasdasdasdkjashkdhakjsd<br/><img class="slider" src="http://bs.baidu.com/uploadimg/1031384407855.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/><img class="slider" src="http://bs.baidu.com/uploadimg/14711384407892.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/><img class="slider" src="http://bs.baidu.com/uploadimg/96771384407909.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/><img class="slider" src="http://bs.baidu.com/uploadimg/53231384407920.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/></div>
-
+<div class="editor_toolbar"><a class="editor_submit">提交</a></div>
 <br />
 <br />
 audio标签：
