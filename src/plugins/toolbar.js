@@ -27,82 +27,37 @@ UM.plugins.toolbar = function(){
         function initToolBarEvent () {
             var $toolbar = _this.$toolbar;
             $toolbar.find('.edui-btn-photo input[type=file],.edui-btn-camera input[type=file]').change(function(e){
-                try{
-                    //获取文件列表
-                    var fileList = e.target.files,
-                        hasImg = false;
-                    if(fileList) {
-                        $.each(fileList, function (i, f) {
-                            if (/^image/.test(f.type)) {
-
-                                //模拟数据
-                                var fd = new FormData();
-                                fd.append(me.getOpt('imageFieldName') || 'upfile', f);
-                                fd.append('type', 'ajax');
-                                $.ajax({
-                                    type: 'post',
-                                    url: me.getOpt('imageUrl'),
-                                    data: fd,
-                                    contentType:false,
-                                    processData:false,
-                                    success:function(data){
-                                        $('#message').html('response: ' + data);
-                                        var picLink = me.getOpt('imagePath') + data;
-                                        if(picLink) {
-                                            me.execCommand('insertimages', [{
-                                                'class': 'slider',
-                                                'src': picLink,
-                                                'width': 60,
-                                                'height': 60,
-                                                'style': 'border:1px #ccc solid;margin-right:2px;'
-                                            }]);
-                                        }
-                                    }
-                                })
-
-                                hasImg = true;
-                            }
+                var i = 0,
+                    count = e.target.files && e.target.files.length,
+                    imgArr = [];
+                sendFile(e, function(xhr){
+                    var data = xhr.responseText;
+                    $('#message').html('response: ' + data);
+                    var picLink = me.getOpt('imagePath') + data;
+                    if(picLink) {
+                        imgArr.push({
+                            'class': 'slider',
+                            'src': picLink,
+                            'width': 60,
+                            'height': 60,
+                            'style': 'border:1px #ccc solid;margin-right:2px;'
                         });
-                        if(hasImg) e.preventDefault();
+
+                        (++i >= count) && me.execCommand('insertimages', imgArr);
                     }
-                }catch(e){}
+                });
             });
 
 
             $toolbar.find('.edui-btn-record input[type=file]').change(function(e){
-                try{
-                    //获取文件列表
-                    var fileList = e.target.files,
-                        hasImg = false;
-                    if(fileList) {
-                        $.each(fileList, function (i, f) {
-                            if (/^audio/.test(f.type)) {
-
-                                //模拟数据
-                                var fd = new FormData();
-                                fd.append(me.getOpt('imageFieldName') || 'upfile', f);
-                                fd.append('type', 'ajax');
-                                $.ajax({
-                                    type: 'post',
-                                    url: me.getOpt('imageUrl'),
-                                    data: fd,
-                                    contentType:false,
-                                    processData:false,
-                                    success:function(data){
-                                        $('#message').html('response: ' + data);
-                                        var musicLink = me.getOpt('imagePath') + data;
-                                        if(musicLink) {
-                                            me.execCommand('inserthtml', '<audio src="' + musicLink + '" controls="controls" style="width:280px;">你的浏览器不支持audio标签</audio>');
-                                        }
-                                    }
-                                })
-
-                                hasImg = true;
-                            }
-                        });
-                        if(hasImg) e.preventDefault();
+                sendFile(e, function(xhr){
+                    var data = xhr.responseText;
+                    $('#message').html('response: ' + data);
+                    var musicLink = me.getOpt('imagePath') + data;
+                    if(musicLink) {
+                        me.execCommand('inserthtml', '<audio src="' + musicLink + '" controls="controls" style="width:280px;">你的浏览器不支持audio标签</audio>');
                     }
-                }catch(e){}
+                });
             });
 
             $toolbar.find('.edui-btn-emotion').click(function(){
@@ -141,6 +96,31 @@ UM.plugins.toolbar = function(){
         hideToolbar: function(){
             this.toolbarState = false;
             this.$toolbar.hide();
+        }
+    }
+
+    function sendFile(e, callback){
+        //获取文件列表
+        var fileList = e.target.files,
+            hasImg = false;
+        if(fileList) {
+            $.each(fileList, function (i, f) {
+                //模拟数据
+                var fd = new FormData();
+                fd.append(me.getOpt('imageFieldName') || 'upfile', f);
+                fd.append('type', 'ajax');
+
+                $.ajax({
+                    type: 'post',
+                    url: me.getOpt('imageUrl'),
+                    data: fd,
+                    contentType:false,
+                    processData:false,
+                    complete:callback
+                })
+                hasImg = true;
+            });
+            if(hasImg) e.preventDefault();
         }
     }
 
