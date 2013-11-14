@@ -1,38 +1,113 @@
 /*
  * 拖放文件到编辑器，上传并插入
  */
-UM.plugins['imageslider'] = function() {
+UM.plugins['imageslider'] = function () {
     var me = this,
-        $sliderContainer;
+        slider,
+        slideToIndex;
 
-    function showImageSlider(){
-        if(!$sliderContainer) {
-            $sliderContainer = $('<div>');
+    /* 幻灯弹出层的类 */
+    function Slider() {
+        this.$sliderWrapper;
+        this.$sliderContainer;
+        this.init();
+    }
+    Slider.prototype = {
+        init: function () {
+            var _this = this;
+
+            this.$sliderContainer = $('<div>').css({ width: '100%', height: '100%' });
+
+            var $backIcon = $('<a class="ui-icon-back">返回</a>'),
+                $pageBar = $('<span class="ui-pagebar">1/4</span>'),
+                $deleteIcon = $('<a class="ui-icon-delete">删除</a>'),
+                $toolbar = $('<div class="ui-toolbar">');
+            $toolbar.append($backIcon).append($pageBar).append($deleteIcon);
+
+            $backIcon.on('tap', function(){
+                _this.hide();
+            });
+            $deleteIcon.on('tap', function(){
+                var index = _this.$sliderContainer.slider('getIndex');
+                var $imgs = me.$body.find('img.slider');
+
+                $imgs.eq(index).remove();
+                slideToIndex = $imgs.length - 1 > index ? index:index - 1;
+
+                _this.hide();
+                if(slideToIndex >= 0) {
+                    _this.show();
+                }
+            });
+
+            this.$sliderWrapper = $('<div>').css({
+                position: 'absolute', top: '0', left: '0', width: '100%', height: '100%'
+            }).hide();
+            this.$sliderWrapper.hide().appendTo(document.body);
+            this.$sliderWrapper.append($toolbar);
+            this.$sliderWrapper.append(this.$sliderContainer);
+
+            this.$pageBar = $pageBar;
+
+        },
+        reset: function () {
+            var $pageBar = this.$pageBar,
+                $sider = this.$sliderContainer;
+
+            $sider.html('');
+            me.$body.find('img.slider').each(function () {
+                $('<div><img src="' + $(this).attr('src') + '" /></div>').appendTo($sider);
+            });
+
+            $sider.slider({
+                slide: function () {
+                    $pageBar.text( ($sider.slider('getIndex') + 1) + '/' + me.$body.find('img.slider').length );
+                },
+                ready: function () {
+                    $sider.find('.ui-slider-item img').each(function () {
+                        var $img = $(this),
+                            marginTop = ($img.parent().height() - $img.height()) / 2;
+                        $img.css({'margin': (marginTop > 0 ? marginTop : 0) + 'px auto'});
+                    });
+                }
+            });
+            $sider.slider('active', slideToIndex);
+        },
+        show: function () {
+            this.$sliderWrapper.show();
+            this.reset();
+        },
+        hide: function () {
+            this.$sliderWrapper.hide();
+            this.$sliderContainer.slider('destroy');
         }
-        $sliderContainer.html();
-        me.$body.find('img.slider').each(function(){
-            $('<div><img src="' + $(this).attr('src') + '" /></div>').appendTo($sliderContainer);
-        });
-
-        $sliderContainer.css({width:'100%', height:'100%'}).appendTo(document.body);
-        $sliderContainer.slider({imgZoom: true});
-    }
-    function hideImageSlider(){
-        $sliderContainer.remove().destroy();
     }
 
-    me.addListener('showimageslider', function(type, current){
-        showImageSlider();
+    /* 设置显示幻灯的监听函数 */
+    me.addListener('showimageslider', function (type, current) {
+        slider = slider || new Slider();
+        slider.show();
     });
-    me.addListener('hideImageSlider', function(type, current){
-        hideImageSlider();
+    /* 设置隐藏幻灯的监听函数 */
+    me.addListener('hideImageSlider', function (type, current) {
+        slider && slider.hide();
     });
 
-    me.addListener('ready', function(){
-        me.$body.on('click',function (e) {
+    /* 点击编辑区域时，触发显示幻灯的事件 */
+    me.addListener('ready', function () {
+        me.$body.on('click', function (e) {
             var $target = $(e.target);
-            if($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
+            if ($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
+                // 设置现实幻灯在第几张图片
+                slideToIndex = 0;
+                me.$body.find('img.slider').each(function(index, img){
+                    if(img == $target[0]) slideToIndex = index;
+                });
+
                 me.fireEvent('showimageslider', e.target);
+                domUtils.preventDefault(e);
+                me.blur();
+                return false;
             }
         });
     });

@@ -19,7 +19,7 @@
             'plugins/inserthtml.js',
             'plugins/dropfile.js',
             'plugins/insertimages.js',
-            'plugins/cursor.js'
+            'plugins/cursor.js',
             'plugins/dropfile.js',
             'plugins/imageslider.js'
         ],
