@@ -71,7 +71,7 @@ UM.plugins['imageslider'] = function () {
                     });
                 }
             });
-            $sider.slider('active', slideToIndex);
+            $sider.slider('slideTo', slideToIndex);
         },
         show: function () {
             this.$sliderWrapper.show();

@@ -30,98 +30,26 @@
             margin-top: 5px;
             text-align:right;
         }
-        .ui-slider{
-            background:#666666;
-        }
-        .ui-slider .ui-slider-group {
-            width: 100%;
-            height: 100%;
-        }
-        .ui-slider .ui-slider-group .ui-slider-item {
-            background:#666666;
-            width: 100%;
-            height: 100%;
-            vertical-align: middle;
-            display: block;
-        }
-        .ui-slider .ui-slider-group .ui-slider-item img {
-            width: 100%;
-            display: block;
-        }
-        .ui-slider .ui-slider-dots {
-            position: absolute;
-            bottom: 6px;
-            right: 0;
-            padding: 0 6px;
-            text-align: center;
-            width: 100%;
-        }
-        /*.ui-slider .ui-slider-dots > b {*/
-            /*width: 10px;*/
-            /*height: 10px;*/
-            /*border-radius: 5px;*/
-        /*}*/
-
-        .ui-toolbar{
-            background: #333333;
-            line-height: 36px;
-            height: 36px;
-            text-align: center;
-        }
-        .ui-toolbar .ui-icon-back {
-            float: left;
-            font-size: 14px;
-            color: #f7f7f7;
-            margin: 2px 0px 0px 4px;
-            width: 50px;
-            height: 30px;
-            line-height: 30px;
-            background-image: url(./themes/images/toolbar.png);
-            background-position: 0px 0px;
-        }
-        .ui-toolbar .ui-pagebar {
-            color: #f7f7f7;
-            font-size: 14px;
-            text-align: center;
-            margin: 0 auto;
-        }
-        .ui-toolbar .ui-icon-delete {
-            float: right;
-            color: #f7f7f7;
-            font-size: 0px;
-            float: right;
-            margin: 2px 4px 0px 0px;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-            background-image: url(./themes/images/toolbar.png);
-            background-position: 0px -36px;
-        }
     </style>
     <script src="zepto.js"></script>
+
+    <script src="third-party/gmu/gmu.js"></script>
+    <link rel="stylesheet" href="third-party/gmu/gmu.css"/>
 
     <script src="umeditor.config.js"></script>
     <script src="editor_api.js"></script>
     <script src="lang/zh-cn/zh-cn.js"></script>
     <link rel="stylesheet" href="./themes/umeditor.css"/>
-
-    <script src="third-party/gmu/gmu.js"></script>
-    <link rel="stylesheet" href="third-party/gmu/gmu.css"/>
 </head>
 <body>
 
 <h1>M-Editor演示</h1>
-<div style="width:100%;min-height:80px;" class="editor_input" id="editor"><img class="slider" src="php/upload/20131113/13843231293041.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/><img class="slider" src="php/upload/20131113/13843231295968.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/><img class="slider" src="php/upload/20131113/13843231291527.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/><img class="slider" src="php/upload/20131113/13843231291427.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/></div>
-<div class="editor_menu">
-    <a href="javascript:void(0)" class="edui-btn edui-btn-photo"><input type="file" name="photo" id="photo" accept="image/*" multiple="multiple" /></a>
-    <a href="javascript:void(0)" class="edui-btn edui-btn-camera"><input type="file" name="camera" id="camera" accept="image/*" /></a>
-    <a href="javascript:void(0)" class="edui-btn edui-btn-record"><!--<input type="file" name="record" id="record" accept="audio/*" />--></a>
-    <a href="javascript:void(0)" class="edui-btn edui-btn-emotion"></a>
-    <a href="javascript:void(0)" class="edui-btn edui-btn-remind"></a>
-</div>
-<div id="message"></div>
+<div style="width:100%;min-height:80px;" class="editor_input" id="editor">adasdasdasdasdkjashkdhakjsd<br/><img class="slider" src="http://bs.baidu.com/uploadimg/1031384407855.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/><img class="slider" src="http://bs.baidu.com/uploadimg/14711384407892.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/><img class="slider" src="http://bs.baidu.com/uploadimg/96771384407909.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/><img class="slider" src="http://bs.baidu.com/uploadimg/53231384407920.jpg" width="60" height="60" style="border:1px #ccc solid;margin-right:2px;"/></div>
 
-<script src="test.js"></script>
+<script>
+    var editor = new UM.Editor();
+    editor.render('editor')
+</script>
 
 </body>
 </html>

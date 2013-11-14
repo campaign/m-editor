@@ -5,7 +5,7 @@ UM.commands['insertimages'] = {
 
         function createImgsHtml(images){
             var html = [];
-            $.each(images,function(img){
+            $.each(images,function(key, img){
                 var attrs = [];
                 $.each(img,function(k,v){
                     attrs.push(' ' + k + '="' + v + '"');

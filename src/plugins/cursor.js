@@ -13,7 +13,7 @@ UM.plugins.cursor = function(){
         me.fireEvent('hidepopup');
         clearTimeout(showtimer);
     });
-    me.addListener('keyup',function(e){
+    me.addListener('keyup click afterinserthtml',function(e){
         clearTimeout(showtimer);
         showtimer = setTimeout(function(){
             var offset = getOffset();
