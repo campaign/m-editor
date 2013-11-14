@@ -12,7 +12,7 @@ UM.commands['insertimages'] = {
                 });
                 html.push('<img ' + attrs.join(' ') + ' />')
             })
-            return html.join('')
+            return html.join('') + ''
         }
         rng.txtToElmBoundary();
         start = rng.startContainer.childNodes[rng.startOffset-1];

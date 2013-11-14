@@ -12,18 +12,14 @@ UM.plugins.toolbar = function(){
         /* menu按钮的点击事件 */
         this.toolbarState = false;
         this.$menu.on('tap', function(){
-            this.toolbarState ? _this.hideToolbar():_this.showToolbar();
-        });
-        /* toolbar的点击事件 */
-        this.$toolbar.on('tap', function(){
-            _this.hide();
+            _this.toolbarState ? _this.hideToolbar():_this.showToolbar();
         });
 
         /* 初始化toolbar */
         this.$toolbar.html('<a href="javascript:void(0)" class="edui-btn edui-btn-photo"><input type="file" name="photo" id="photo" accept="image/*" multiple="multiple" /></a>' +
-            '<a href="javascript:void(0)" class="edui-btn edui-btn-camera"><input type="file" name="camera" id="camera" accept="image/*" /></a>' +
-            '<a href="javascript:void(0)" class="edui-btn edui-btn-record"><!--<input type="file" name="record" id="record" accept="audio/*" />--></a>' +
             '<a href="javascript:void(0)" class="edui-btn edui-btn-emotion"></a>' +
+            '<a href="javascript:void(0)" class="edui-btn edui-btn-camera"><input type="file" name="camera" id="camera" accept="image/*" /></a>' +
+            '<a href="javascript:void(0)" class="edui-btn edui-btn-record"><input type="file" name="record" id="record" accept="audio/*" /></a>' +
             '<a href="javascript:void(0)" class="edui-btn edui-btn-remind"></a>');
 
         /* 初始化toolbar上按钮的事件 */
@@ -72,7 +68,7 @@ UM.plugins.toolbar = function(){
                 }catch(e){}
             });
 
-            /*
+
             $toolbar.find('.edui-btn-record input[type=file]').change(function(e){
                 try{
                     //获取文件列表
@@ -108,11 +104,11 @@ UM.plugins.toolbar = function(){
                     }
                 }catch(e){}
             });
-             */
+
             $toolbar.find('.edui-btn-emotion').click(function(){
                 me.execCommand('inserthtml', '<img class="emotion" src="http://bs.baidu.com/uploadimg/86961384265701.gif" />');
             });
-            //    $toolbar.find('.edui-btn-record').click(function(){ });
+                $toolbar.find('.edui-btn-record').click(function(){ });
             $toolbar.find('.edui-btn-remind').click(function(){
                 me.execCommand('inserthtml', '<a href="http://tieba.baidu.com/home/main?un=ueditor">@ueditor</a>&nbsp;');
             });
@@ -125,18 +121,14 @@ UM.plugins.toolbar = function(){
             /* 显示menu */
             this.$menu.css({
                 top: top,
-                left: left
+                left: Math.max(0, Math.min(left, $(me.document).width() - 35))
             }).show();
             /* 设置toolbar的位置 */
             this.$toolbar.css({
-                top: top + 20,
-                left: left + 10
+                top: top + 30,
+                left: Math.max(0, Math.min(left + 10, $(me.document).width() - 170))
             });
 
-            /* 点击其他地方隐藏menu和toolbar */
-            $(document).on('tap scroll click', function(){
-
-            });
         },
         hide: function () {
             this.$menu.hide();
@@ -154,6 +146,9 @@ UM.plugins.toolbar = function(){
 
     me.addListener('showpopup', function (type, top, left) {
         menu = menu || new Menu();
-        menu.show(top - 4, left + 3);
+        menu.show(top - 7, left + 3);
+    });
+    me.addListener('hidepopup', function (type, top, left) {
+        menu && menu.hide();
     });
 };

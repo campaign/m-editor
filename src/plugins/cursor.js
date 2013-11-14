@@ -9,11 +9,11 @@ UM.plugins.cursor = function(){
         return offset;
 
     }
-    me.addListener('keydown',function(e){
+    me.addListener('keydown mousedown beforeinserthtml',function(e){
         me.fireEvent('hidepopup');
         clearTimeout(showtimer);
     });
-    me.addListener('keyup click afterinserthtml',function(e){
+    me.addListener('keyup mouseup afterinserthtml',function(e){
         clearTimeout(showtimer);
         showtimer = setTimeout(function(){
             var offset = getOffset();

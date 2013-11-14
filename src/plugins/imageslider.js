@@ -41,7 +41,7 @@ UM.plugins['imageslider'] = function () {
             });
 
             this.$sliderWrapper = $('<div>').css({
-                position: 'absolute', top: '0', left: '0', width: '100%', height: '100%'
+                'z-index': (me.getOpt('zIndex') + 1),position: 'absolute', top: '0', left: '0', width: '100%', height: '100%'
             }).hide();
             this.$sliderWrapper.hide().appendTo(document.body);
             this.$sliderWrapper.append($toolbar);
@@ -104,6 +104,7 @@ UM.plugins['imageslider'] = function () {
                     if(img == $target[0]) slideToIndex = index;
                 });
 
+                me.fireEvent('hidepopup');
                 me.fireEvent('showimageslider', e.target);
                 domUtils.preventDefault(e);
                 me.blur();
