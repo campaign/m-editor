@@ -99,24 +99,7 @@ UM.plugins['imageslider'] = function () {
 
     /* 点击编辑区域时，触发显示幻灯的事件 */
     me.addListener('ready', function () {
-//        me.$body.on('tap', function (e) {
-//            var $target = $(e.target);
-//            if ($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
-//                // 设置现实幻灯在第几张图片
-//                slideToIndex = 0;
-//                me.$body.find('img.slider').each(function(index, img){
-//                    if(img == $target[0]) slideToIndex = index;
-//                });
-//
-//                me.fireEvent('hidepopup');
-//                me.fireEvent('showimageslider', e.target);
-//                domUtils.preventDefault(e);
-//                me.blur();
-//                return false;
-//            }
-//        });
-
-        me.$body.find('img.slider').on('tap', function (e) {
+        me.$body.on('tap', function (e) {
             var $target = $(e.target);
             if ($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
                 // 设置现实幻灯在第几张图片
@@ -132,5 +115,22 @@ UM.plugins['imageslider'] = function () {
                 return false;
             }
         });
+
+//        me.$body.find('img.slider').on('tap', function (e) {
+//            var $target = $(e.target);
+//            if ($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
+//                // 设置现实幻灯在第几张图片
+//                slideToIndex = 0;
+//                me.$body.find('img.slider').each(function(index, img){
+//                    if(img == $target[0]) slideToIndex = index;
+//                });
+//
+//                me.fireEvent('hidepopup');
+//                me.fireEvent('showimageslider', e.target);
+//                domUtils.preventDefault(e);
+//                me.blur();
+//                return false;
+//            }
+//        });
     });
 };
