@@ -23,13 +23,14 @@ UM.commands['insertimages'] = {
         rng.txtToElmBoundary(true);
         start = getPreImg(rng.startContainer.childNodes[rng.startOffset]||rng.startContainer.childNodes[rng.startOffset-1]);
         if(start && start.nodeName != 'IMG'){
+            me.fireEvent('beforeinserthtml');
             var bk = rng.createBookmark();
             domUtils.breakParent(bk.start,rng.startContainer);
             var $newline = $('<p><br/></p>');
             $newline.insertBefore(bk.start);
             $newline.html(createImgsHtml(images));
             rng.moveToBookmark(bk).setStartAtLast($newline[0]).setCursor(false,true);
-
+            me.fireEvent('afterinserthtml');
         }else{
             me.execCommand('insertHtml',createImgsHtml(images))
         }

@@ -43,7 +43,9 @@ UM.plugins.toolbar = function(){
                             'style': 'border:1px #ccc solid;margin-right:2px;'
                         });
 
-                        (++i >= count) && me.execCommand('insertimages', imgArr);
+                        if(++i >= count) {
+                            me.execCommand('insertimages', imgArr);
+                        }
                     }
                 });
             });
