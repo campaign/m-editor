@@ -14,19 +14,21 @@ UM.commands['insertimages'] = {
             })
             return html.join('') + ''
         }
-        rng.txtToElmBoundary();
-        start = rng.startContainer.childNodes[rng.startOffset-1];
-        if(start && start.nodeName != 'IMG'){
-            start = start.nextSibling;
-            var $newline = $('<p><br/></p>');
-            if(start){
-                domUtils.breakParent(start,start.parentNode);
-                $newline.insertBefore(start.parentNode);
-            }else{
-                $newline.insertAfter(start.parentNode);
+        function getPreImg(node){
+            while(node && domUtils.isWhitespace(node)){
+                node = node.previousSibling
             }
+            return node;
+        }
+        rng.txtToElmBoundary(true);
+        start = getPreImg(rng.startContainer.childNodes[rng.startOffset]||rng.startContainer.childNodes[rng.startOffset-1]);
+        if(start && start.nodeName != 'IMG'){
+            var bk = rng.createBookmark();
+            domUtils.breakParent(bk.start,rng.startContainer);
+            var $newline = $('<p><br/></p>');
+            $newline.insertBefore(bk.start);
             $newline.html(createImgsHtml(images));
-            rng.setStartAtLast($newline[0]).setCursor(false,true);
+            rng.moveToBookmark(bk).setStartAtLast($newline[0]).setCursor(false,true);
 
         }else{
             me.execCommand('insertHtml',createImgsHtml(images))
