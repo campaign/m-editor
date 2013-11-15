@@ -33,7 +33,7 @@ UM.plugins.toolbar = function(){
                 sendFile(e, function(xhr){
                     var data = xhr.responseText;
                     $('#message').html('response: ' + data);
-                    var picLink = me.getOpt('imagePath') + data;
+                    var picLink = me.getOpt('uploadPath') + data;
                     if(picLink) {
                         imgArr.push({
                             'class': 'slider',
@@ -53,7 +53,7 @@ UM.plugins.toolbar = function(){
                 sendFile(e, function(xhr){
                     var data = xhr.responseText;
                     $('#message').html('response: ' + data);
-                    var musicLink = me.getOpt('imagePath') + data;
+                    var musicLink = me.getOpt('uploadPath') + data;
                     if(musicLink) {
                         me.execCommand('inserthtml', '<audio src="' + musicLink + '" controls="controls" style="width:100px;">浏览器不支持audio标签</audio>');
                     }
@@ -112,7 +112,7 @@ UM.plugins.toolbar = function(){
 
                 $.ajax({
                     type: 'post',
-                    url: me.getOpt('imageUrl'),
+                    url: me.getOpt('uploadUrl'),
                     data: fd,
                     contentType:false,
                     processData:false,

@@ -19,8 +19,8 @@
 
         //为编辑器实例添加一个路径，这个不能被注释
         UMEDITOR_HOME_URL : '',
-        imageUrl: 'php/upload.php',
-        imagePath: 'php/'
+        uploadUrl: 'php/upload.php',
+        uploadPath: 'php/'
 
     };
 })();

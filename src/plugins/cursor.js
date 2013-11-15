@@ -12,12 +12,23 @@ UM.plugins.cursor = function(){
         me.fireEvent('hidepopup');
         clearTimeout(showtimer);
     });
-    me.addListener('keyup afterinserthtml focus tap',function(e){
+    me.addListener('keyup afterinserthtml focus',function(e){
         me.fireEvent('hidepopup');
         clearTimeout(showtimer);
         showtimer = setTimeout(function(){
             var offset = getOffset();
             me.fireEvent('showpopup',offset.top,offset.left)
         },1000)
+    });
+
+    me.ready(function(){
+        me.$body.on('tap',function(e){
+            me.fireEvent('hidepopup');
+            clearTimeout(showtimer);
+            showtimer = setTimeout(function(){
+                var offset = getOffset();
+                me.fireEvent('showpopup',offset.top,offset.left)
+            },1000)
+        });
     });
 };
