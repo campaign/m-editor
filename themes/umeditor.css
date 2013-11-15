@@ -31,12 +31,12 @@
 
 .edui-menu{
     position: absolute;
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
     border: 1px #f2f2f2 solid;
     background-image: url(./images/menu.png);
-    -webkit-background-size: auto 30px;
+    -webkit-background-size: auto 24px;
 }
 .edui-toolbar{
     position: absolute;
