@@ -8,11 +8,12 @@ UM.plugins.cursor = function(){
         rng.moveToBookmark(bk).select();
         return offset;
     }
-    me.addListener('keydown beforeinserthtml',function(e){
+    me.addListener('keydown',function(e){
         me.fireEvent('hidepopup');
         clearTimeout(showtimer);
     });
-    me.addListener('keyup afterinserthtml focus',function(e){
+    me.addListener('keyup afterinserthtml focus tap',function(e){
+        me.fireEvent('hidepopup');
         clearTimeout(showtimer);
         showtimer = setTimeout(function(){
             var offset = getOffset();
