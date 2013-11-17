@@ -110,8 +110,13 @@ UM.plugins['imageslider'] = function () {
 
                 me.fireEvent('hidepopup');
                 me.fireEvent('showimageslider', e.target);
-                domUtils.preventDefault(e);
-                me.blur();
+                e.preventDefault();
+
+                var $input = $('<input>').appendTo(document.body);
+                $input.focus();
+                setTimeout(function(){
+                   $input.remove()
+                })
                 return false;
             }
         });
