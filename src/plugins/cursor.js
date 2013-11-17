@@ -29,6 +29,8 @@ UM.plugins.cursor = function(){
                 var offset = getOffset();
                 me.fireEvent('showpopup',offset.top,offset.left)
             },1000)
+            e.preventDefault();
+            e.stopPropagation();
         });
     });
 };
