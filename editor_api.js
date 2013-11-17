@@ -19,7 +19,6 @@
             'plugins/inserthtml.js',
             'plugins/insertimages.js',
             'plugins/cursor.js',
-            'plugins/dropfile.js',
             'plugins/imageslider.js',
             'plugins/toolbar.js'
         ],
