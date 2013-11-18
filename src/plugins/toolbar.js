@@ -6,13 +6,20 @@ UM.plugins.toolbar = function(){
         var _this = this;
 
         /* 初始化靓俩个dom元素 */
-        this.$menu = $('<div class="edui-menu">').hide().appendTo(me.document.body);
+        this.$menu = $('<div class="edui-menu" style="z-index:100000">').hide().appendTo(me.document.body);
         this.$toolbar = $('<div class="edui-toolbar">').hide().appendTo(me.document.body);
 
         /* menu按钮的点击事件 */
         this.toolbarState = false;
-        this.$menu.on('tap', function(){
+        this.$menu.on('tap', function(e){
             _this.toolbarState ? _this.hideToolbar():_this.showToolbar();
+            var range = me.selection.getRange();
+            me._bakRange = range;
+            var $input = $('<input>').appendTo(document.body);
+            $input.focus();
+            setTimeout(function(){
+                $input.remove()
+            })
         });
 
         /* 初始化toolbar */
@@ -30,22 +37,27 @@ UM.plugins.toolbar = function(){
                 var i = 0,
                     count = e.target.files && e.target.files.length,
                     imgArr = [];
+
+                var fileList = e.target.files,spans=[];
+                if(fileList) {
+                    $.each(fileList, function (i, f) {
+                        spans.push('<span id="_me_image" style="width:60px;height:60px;border:1px solid #ccc;margin-right:2px;"></span>')
+                    });
+                    me.execCommand('insertimages', spans);
+                }
                 sendFile(e, function(xhr){
                     var data = xhr.responseText;
                     $('#message').html('response: ' + data);
                     var picLink = me.getOpt('uploadPath') + data;
                     if(picLink) {
-                        imgArr.push({
-                            'class': 'slider',
-                            'src': picLink,
-                            'width': 60,
-                            'height': 60,
-                            'style': 'border:1px #ccc solid;margin-right:2px;'
-                        });
+                        $('<img src="'+picLink+'" style="display:none;"/>').appendTo(document.body)
+                            .on('load',function(){
+                                $('<img class="slider" src="'+this.src+'" style="width:60px;height:60px;margin-right:2px;"/>').insertBefore($('#_me_image',me.document))
+                                $('#_me_image',me.document).remove();
+                                $(this).remove()
+                            })
 
-                        if(++i >= count) {
-                            me.execCommand('insertimages', imgArr);
-                        }
+
                     }
                 });
             });
@@ -62,8 +74,16 @@ UM.plugins.toolbar = function(){
                 });
             });
 
-            $toolbar.find('.edui-btn-emotion').click(function(){
-                me.execCommand('inserthtml', '<img class="emotion" src="http://bs.baidu.com/uploadimg/86961384265701.gif" />');
+            $toolbar.find('.edui-btn-emotion').tap(function(){
+                me.execCommand('insertHtml', '<span id="_me_emotion" style="width:20px;height:20px;border:1px solid #ccc;display:inline-block"></span>');
+                $('<img src="http://bs.baidu.com/uploadimg/86961384265701.gif" style="display:none;"/>').appendTo(document.body)
+                    .on('load',function(){
+
+                        $('<img class="emotion" src="http://bs.baidu.com/uploadimg/86961384265701.gif" />').insertBefore($('#_me_emotion',me.document))
+                        $('#_me_emotion',me.document).remove();
+                        $(this).remove()
+                    })
+
             });
                 $toolbar.find('.edui-btn-record').click(function(){ });
             $toolbar.find('.edui-btn-remind').click(function(){

@@ -10,7 +10,7 @@ UM.commands['insertimages'] = {
                 $.each(img,function(k,v){
                     attrs.push(' ' + k + '="' + v + '"');
                 });
-                html.push('<img ' + attrs.join(' ') + ' />')
+                html.push('<span ' + attrs.join(' ') + ' ></span>')
             })
             return html.join('') + ''
         }
