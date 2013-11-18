@@ -102,6 +102,7 @@ UM.plugins['imageslider'] = function () {
         me.$body.on('tap', function (e) {
             var $target = $(e.target);
             if ($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
+
                 // 设置现实幻灯在第几张图片
                 slideToIndex = 0;
                 me.$body.find('img.slider').each(function(index, img){
@@ -120,6 +121,18 @@ UM.plugins['imageslider'] = function () {
                 return false;
             }
         });
-
+        var isMove = false;
+        me.$body.on('touchmove',function(e){
+            isMove = true;
+        })
+        me.$body.on('touchend',function(e){
+            var target = e.target;
+            if(target.nodeName == 'IMG'){
+                debugger
+                var rng = me.selection.getRange();
+                rng.insertNode(target);
+                rng.setStartAfter(target).collapse(true).select()
+            }
+        })
     });
 };
