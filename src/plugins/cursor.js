@@ -23,6 +23,7 @@ UM.plugins.cursor = function(){
 
     me.ready(function(){
         me.$body.on('tap',function(e){
+            var $target = $(e.target);
             if(!($target.attr('tagName') == 'IMG' && $target.hasClass('slider'))) {
                 me.fireEvent('hidepopup');
                 clearTimeout(showtimer);
