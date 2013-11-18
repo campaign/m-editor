@@ -15,7 +15,7 @@ UM.plugins.toolbar = function(){
             _this.toolbarState ? _this.hideToolbar():_this.showToolbar();
             var range = me.selection.getRange();
             me._bakRange = range;
-            var $input = $('<input>').appendTo(document.body);
+            var $input = $('<input>').hide().appendTo(document.body);
             $input.focus();
             setTimeout(function(){
                 $input.remove()
