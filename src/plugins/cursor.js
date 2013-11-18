@@ -23,14 +23,16 @@ UM.plugins.cursor = function(){
 
     me.ready(function(){
         me.$body.on('tap',function(e){
-            me.fireEvent('hidepopup');
-            clearTimeout(showtimer);
-            showtimer = setTimeout(function(){
-                var offset = getOffset();
-                me.fireEvent('showpopup',offset.top,offset.left)
-            },1000)
-            e.preventDefault();
-            e.stopPropagation();
+            if(!($target.attr('tagName') == 'IMG' && $target.hasClass('slider'))) {
+                me.fireEvent('hidepopup');
+                clearTimeout(showtimer);
+                showtimer = setTimeout(function(){
+                    var offset = getOffset();
+                    me.fireEvent('showpopup',offset.top,offset.left)
+                },1000)
+                e.preventDefault();
+                e.stopPropagation();
+            }
         });
     });
 };
