@@ -121,17 +121,35 @@ UM.plugins['imageslider'] = function () {
                 return false;
             }
         });
-        var isMove = false;
-        me.$body.on('touchmove',function(e){
-            isMove = true;
-        })
+
+        var isMove = false,orgOffset,x= 0,y=0;
+        me.$body.on('touchstart',function(e){
+            var target = e.target
+            if(target.nodeName == 'IMG'){
+                orgOffset = {
+                    x : e.pageX,
+                    y : e.pageY
+                }
+
+            }
+        }).on('touchmove',function(e){
+
+                x += Math.abs(e.pageX - orgOffset.x);
+                y += Math.abs(e.pageY - orgOffset.y);
+                orgOffset.x = e.pageX;
+                orgOffset.y = e.pageY;
+            })
+
         me.$body.on('touchend',function(e){
             var target = e.target;
             if(target.nodeName == 'IMG'){
-                debugger
-                var rng = me.selection.getRange();
-                rng.insertNode(target);
-                rng.setStartAfter(target).collapse(true).select()
+
+                if(x > 100 || y > 100){
+                    var rng = me.selection.getRange();
+                    rng.insertNode(target);
+                    rng.setStartAfter(target).collapse(true).select()
+                }
+
             }
         })
     });
