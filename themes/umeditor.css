@@ -1,4 +1,6 @@
 .edui-btn {
+    padding:0;
+    margin:0;
     width: 34px;
     height: 34px;
     display: inline-block;
@@ -19,9 +21,11 @@
     background-position: -102px 0px;
 }
 .edui-btn-remind {
-    background-position: -144px 0px;
+    background-position: -136px 0px;
 }
 .edui-btn input{
+    padding:0;
+    margin:0;
     width: 34px;
     height: 34px;
     position: relative;

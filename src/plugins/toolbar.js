@@ -29,7 +29,7 @@ UM.plugins.toolbar = function(){
         this.$toolbar.html('<a href="javascript:void(0)" class="edui-btn edui-btn-photo"><input type="file" name="photo" id="photo" accept="image/*" multiple="multiple" /></a>' +
             '<a href="javascript:void(0)" class="edui-btn edui-btn-camera"><input type="file" name="camera" id="camera" accept="image/*" /></a>' +
             '<a href="javascript:void(0)" class="edui-btn edui-btn-emotion"></a>' +
-            '<a href="javascript:void(0)" class="edui-btn edui-btn-record"><input type="file" name="record" id="record" accept="audio/*" /></a>' +
+            '<a href="javascript:void(0)" class="edui-btn edui-btn-record"></a>' +
             '<a href="javascript:void(0)" class="edui-btn edui-btn-remind"></a>');
 
         /* 初始化toolbar上按钮的事件 */
@@ -102,7 +102,7 @@ UM.plugins.toolbar = function(){
     Menu.prototype = {
         updatePositon: function(){
             var top = window.pageYOffset + 6,
-                right = 3;
+                right = 4;
             /* 显示menu */
             this.$menu.css({
                 top: top,

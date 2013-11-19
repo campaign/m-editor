@@ -607,7 +607,7 @@
             var me = this,
                 range = me.selection.getRange();
             me._bakRange = range;
-            var $input = $('<input>').css({position:'absolute', top:window.pageY,left:0}).appendTo(document.body);
+            var $input = $('<input>').css({position:'absolute', top:window.pageY+10,left:10, zIndex: -2}).appendTo(document.body);
             $input.focus();
             $input.remove();
             this.fireEvent('blur');
