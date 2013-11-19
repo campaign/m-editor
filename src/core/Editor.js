@@ -601,9 +601,16 @@
          * 使编辑区域失去焦点
          */
         blur:function(){
-            var sel = this.selection.getNative();
-            sel.empty ? sel.empty() : sel.removeAllRanges();
-            this.fireEvent('blur')
+//            var sel = this.selection.getNative();
+//            sel.empty ? sel.empty() : sel.removeAllRanges();
+
+            var me = this,
+                range = me.selection.getRange();
+            me._bakRange = range;
+            var $input = $('<input>').css({position:'absolute', top:window.pageY,left:0}).appendTo(document.body);
+            $input.focus();
+            $input.remove();
+            this.fireEvent('blur');
         },
         /**
          * 判断编辑器当前是否获得了焦点

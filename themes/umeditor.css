@@ -1,46 +1,46 @@
 .edui-btn {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     display: inline-block;
     overflow: hidden;
     background: url(./images/icons.png) no-repeat;
-    -webkit-background-size: auto 32px;
+    -webkit-background-size: auto 34px;
 }
 .edui-btn-photo {
     background-position: 0px 0px;
 }
 .edui-btn-camera {
-    background-position: -32px 0px;
+    background-position: -34px 0px;
 }
 .edui-btn-record {
-    background-position: -64px 0px;
+    background-position: -68px 0px;
 }
 .edui-btn-emotion {
-    background-position: -96px 0px;
+    background-position: -102px 0px;
 }
 .edui-btn-remind {
-    background-position: -128px 0px;
+    background-position: -144px 0px;
 }
 .edui-btn input{
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     position: relative;
     opacity: 0;
-    font-size: 32px;
+    font-size: 34px;
 }
 
 .edui-menu{
     position: absolute;
-    width: 30px;
-    height: 30px;
-    border-radius: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 17px;
     background-image: url(./images/menu.png);
-    -webkit-background-size: auto 30px;
+    -webkit-background-size: auto 34px;
 }
 .edui-toolbar{
     position: absolute;
-    width: 160px;
-    height: 32px;
+    width: 170px;
+    height: 34px;
     padding: 0px 6px;
     border-radius: 3px;
     border: 1px #a6a6a6 solid;

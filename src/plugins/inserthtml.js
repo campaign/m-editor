@@ -184,14 +184,15 @@ UM.commands['inserthtml'] = {
                     range.insertNode(txt).setStart(txt,0).collapse(true);
                 }
             }
-            range.select(true);
+//            m-editor demo需要失去焦点
+//            range.select(true);
         }catch(e){}
 
 
-        setTimeout(function(){
-            range = me.selection.getRange();
-            range.scrollIntoView();
-            me.fireEvent('afterinserthtml');
-        },200);
+//        setTimeout(function(){
+//            range = me.selection.getRange();
+//            range.scrollIntoView();
+//            me.fireEvent('afterinserthtml');
+//        },200);
     }
 };

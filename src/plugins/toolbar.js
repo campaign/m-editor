@@ -2,6 +2,15 @@ UM.plugins.toolbar = function(){
     var me = this,
         menu;
 
+    function hideKeyboard(){
+        var range = me.selection.getRange();
+        me._bakRange = range;
+        var $input = $('<input>').css({position:'absolute', top:window.pageY,left:0}).appendTo(document.body);
+        $input.focus();
+        $input.remove()
+
+    }
+
     function Menu(){
         var _this = this;
 
@@ -13,23 +22,13 @@ UM.plugins.toolbar = function(){
         this.toolbarState = false;
         this.$menu.on('click', function(e){
             _this.showToolbar();
-
-//            domUtils.preventDefault(e);
-
-            var range = me.selection.getRange();
-            me._bakRange = range;
-            var $input = $('<input>').hide().appendTo(document.body);
-            $input.focus();
-            setTimeout(function(){
-                $input.remove()
-            })
-//            return false;
+            me.blur();
         });
 
         /* 初始化toolbar */
         this.$toolbar.html('<a href="javascript:void(0)" class="edui-btn edui-btn-photo"><input type="file" name="photo" id="photo" accept="image/*" multiple="multiple" /></a>' +
-            '<a href="javascript:void(0)" class="edui-btn edui-btn-emotion"></a>' +
             '<a href="javascript:void(0)" class="edui-btn edui-btn-camera"><input type="file" name="camera" id="camera" accept="image/*" /></a>' +
+            '<a href="javascript:void(0)" class="edui-btn edui-btn-emotion"></a>' +
             '<a href="javascript:void(0)" class="edui-btn edui-btn-record"><input type="file" name="record" id="record" accept="audio/*" /></a>' +
             '<a href="javascript:void(0)" class="edui-btn edui-btn-remind"></a>');
 
@@ -61,12 +60,12 @@ UM.plugins.toolbar = function(){
                             .on('load',function(){
                                 $('<img class="slider" src="'+this.src+'" style="width:60px;height:60px;margin-right:2px;"/>').insertBefore($('#_me_image',me.document))
                                 $('#_me_image',me.document).remove();
-                                $(this).remove()
+                                $(this).remove();
+                                me.blur();
                             })
-
-
                     }
                 });
+                me.blur();
             });
 
 
@@ -79,6 +78,7 @@ UM.plugins.toolbar = function(){
                         me.execCommand('inserthtml', '<audio src="' + musicLink + '" controls="controls" style="width:100px;">浏览器不支持audio标签</audio>');
                     }
                 });
+                me.blur();
             });
 
             $toolbar.find('.edui-btn-emotion').tap(function(){
@@ -89,36 +89,35 @@ UM.plugins.toolbar = function(){
                         $('<img class="emotion" src="http://bs.baidu.com/uploadimg/86961384265701.gif" />').insertBefore($('#_me_emotion',me.document))
                         $('#_me_emotion',me.document).remove();
                         $(this).remove()
-                    })
-
+                    });
+                me.blur();
             });
             $toolbar.find('.edui-btn-record').click(function(){ });
             $toolbar.find('.edui-btn-remind').click(function(){
                 me.execCommand('inserthtml', '<a href="http://tieba.baidu.com/home/main?un=ueditor">@ueditor</a>&nbsp;');
+                me.blur();
             });
         }
     }
     Menu.prototype = {
         updatePositon: function(){
-            var top = window.pageYOffset + 5,
-                left = $(window).width() - 37;
-        },
-        show: function () {
-            this.hideToolbar();
-
-            var top = window.pageYOffset + 5,
-                left = $(window).width() - 37;
+            var top = window.pageYOffset + 6,
+                right = 3;
             /* 显示menu */
             this.$menu.css({
                 top: top,
-                left: Math.max(0, Math.min(left, $(me.document).width() - 35))
-            }).show();
+                right: right
+            });
             /* 设置toolbar的位置 */
             this.$toolbar.css({
                 top: top,
-                left: Math.max(0, Math.min(left + 10, $(me.document).width() - 182))
+                right: right
             });
-
+        },
+        show: function () {
+            this.hideToolbar();
+            this.updatePositon();
+            this.$menu.show();
         },
         hide: function () {
             this.$menu.hide();
@@ -162,12 +161,21 @@ UM.plugins.toolbar = function(){
 
     me.addListener('showpopup', function (type, top, left) {
         menu = menu || new Menu();
-        menu.show();
+        if(me.isFocus()){
+            menu.show();
+        }
     });
     me.addListener('hidepopup', function (type, top, left) {
         menu && menu.hide();
     });
-    $(me.document).on('scroll', function (type, top, left) {
-        menu && menu.updatePositon();
+    $(window).on('scroll', function (type, top, left) {
+//        console.log(scroll);
+        menu && menu.hide();
+        setTimeout(function(){
+            if(me.isFocus()){
+                menu && menu.show();
+            }
+
+        },2000)
     });
 };
