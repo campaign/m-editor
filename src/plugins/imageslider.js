@@ -17,7 +17,10 @@ UM.plugins['imageslider'] = function () {
             var _this = this;
 
             this.$sliderContainer = $('<div>').css({ width: $(me.window).width(), height: $(me.window).height() - 36 });
-
+//            setTimeout(function(){
+//                alert(window.innerHeight)
+//                _this.$sliderContainer.height(window.innerHeight);
+//            },100)
             var $backIcon = $('<a class="ui-icon-back">返回</a>'),
                 $pageBar = $('<span class="ui-pagebar">1/4</span>'),
                 $deleteIcon = $('<a class="ui-icon-delete">删除</a>'),
@@ -41,8 +44,10 @@ UM.plugins['imageslider'] = function () {
             });
 
             this.$sliderWrapper = $('<div class="edui-slider-wrapper">').css({
-                'z-index': (me.getOpt('zIndex') + 100001),position: 'absolute', top: '0', left: '0', width: '100%', height: '100%'
-            }).hide();
+                    'z-index': (me.getOpt('zIndex') + 1000001),position: 'absolute', top: '0', left: '0', width: '100%', height: '100%'
+                }).hide().on('swipeUp swipeDown', function(){
+                    return false;
+                });
             this.$sliderWrapper.hide().appendTo(document.body);
             this.$sliderWrapper.append($toolbar);
             this.$sliderWrapper.append(this.$sliderContainer);
@@ -71,8 +76,17 @@ UM.plugins['imageslider'] = function () {
                         $img.css({'margin': (marginTop > 0 ? marginTop : 0) + 'px auto'});
                     }
                     $sider.find('.ui-slider-item img').on('load', updataImg).each(updataImg);
+
+                    _this.$sliderWrapper.css({
+                        position: 'absolute',
+                        top: window.pageYOffset,
+                        left:0
+                    });
+
                 }
             });
+
+            me.blur();
         },
         updatePageBar:function ( index ) {
             this.$pageBar.text( (index + 1) + '/' + me.$body.find('img.slider').length );
@@ -84,6 +98,7 @@ UM.plugins['imageslider'] = function () {
         hide: function () {
             this.$sliderWrapper.hide();
             this.$sliderContainer.slider('destroy');
+            me.blur();
         }
     }
 
@@ -97,9 +112,9 @@ UM.plugins['imageslider'] = function () {
         slider && slider.hide();
     });
 
-    /* 点击编辑区域时，触发显示幻灯的事件 */
     me.addListener('ready', function () {
-        me.$body.on('tap', function (e) {
+        /* 点击编辑区域时，触发显示幻灯的事件 */
+        me.$body.on('touchstart', function (e) {
             var $target = $(e.target);
             if ($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
                 // 设置现实幻灯在第几张图片
@@ -110,16 +125,15 @@ UM.plugins['imageslider'] = function () {
 
                 me.fireEvent('hidepopup');
                 me.fireEvent('showimageslider', e.target);
-                e.preventDefault();
-
-                var $input = $('<input>').appendTo(document.body);
-                $input.focus();
-                setTimeout(function(){
-                    $input.remove()
-                })
+                me.blur();
+                domUtils.preventDefault(e);
                 return false;
         }
         });
+        me.addListener('focus', function(e){
+            return false;
+        });
+
         var orgOffset,x= 0,y=0;
         me.$body.on('touchstart',function(e){
             var target = e.target;
