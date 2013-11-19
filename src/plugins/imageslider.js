@@ -120,7 +120,7 @@ UM.plugins['imageslider'] = function () {
                 return false;
             }
         });
-        var isMove = false,orgOffset,x= 0,y=0;
+        var orgOffset,x= 0,y=0;
         me.$body.on('touchstart',function(e){
             var target = e.target
             if(target.nodeName == 'IMG'){
