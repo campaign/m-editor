@@ -41,7 +41,7 @@ UM.plugins['imageslider'] = function () {
             });
 
             this.$sliderWrapper = $('<div class="edui-slider-wrapper">').css({
-                'z-index': (me.getOpt('zIndex') + 1),position: 'absolute', top: '0', left: '0', width: '100%', height: '100%'
+                'z-index': (me.getOpt('zIndex') + 100001),position: 'absolute', top: '0', left: '0', width: '100%', height: '100%'
             }).hide();
             this.$sliderWrapper.hide().appendTo(document.body);
             this.$sliderWrapper.append($toolbar);
@@ -59,11 +59,12 @@ UM.plugins['imageslider'] = function () {
             });
 
             $sider.slider({
-                slide: function () {
-                    _this.updatePageBar();
+                index: slideToIndex,
+                slide: function (e, to ) {
+                    _this.updatePageBar( to );
                 },
                 ready: function () {
-                    _this.updatePageBar();
+                    _this.updatePageBar( this.getIndex() );
                     function updataImg(){
                         var $img = $(this),
                             marginTop = ($img.parent().height() - $img.height()) / 2;
@@ -72,10 +73,9 @@ UM.plugins['imageslider'] = function () {
                     $sider.find('.ui-slider-item img').on('load', updataImg).each(updataImg);
                 }
             });
-            $sider.slider('slideTo', slideToIndex);
         },
-        updatePageBar:function () {
-            this.$pageBar.text( (this.$sliderContainer.slider('getIndex') + 1) + '/' + me.$body.find('img.slider').length );
+        updatePageBar:function ( index ) {
+            this.$pageBar.text( (index + 1) + '/' + me.$body.find('img.slider').length );
         },
         show: function () {
             this.$sliderWrapper.show();
@@ -102,7 +102,6 @@ UM.plugins['imageslider'] = function () {
         me.$body.on('tap', function (e) {
             var $target = $(e.target);
             if ($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
-
                 // 设置现实幻灯在第几张图片
                 slideToIndex = 0;
                 me.$body.find('img.slider').each(function(index, img){
@@ -116,12 +115,11 @@ UM.plugins['imageslider'] = function () {
                 var $input = $('<input>').appendTo(document.body);
                 $input.focus();
                 setTimeout(function(){
-                   $input.remove()
+                    $input.remove()
                 })
                 return false;
             }
         });
-
         var isMove = false,orgOffset,x= 0,y=0;
         me.$body.on('touchstart',function(e){
             var target = e.target
