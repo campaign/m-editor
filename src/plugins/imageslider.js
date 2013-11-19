@@ -24,7 +24,7 @@ UM.plugins['imageslider'] = function () {
                 $toolbar = $('<div class="ui-toolbar">');
             $toolbar.append($backIcon).append($pageBar).append($deleteIcon);
 
-            $backIcon.on('tap', function(){
+            $backIcon.on('click', function(){
                 _this.hide();
             });
             $deleteIcon.on('tap', function(){
@@ -90,22 +90,13 @@ UM.plugins['imageslider'] = function () {
         },
         show: function () {
             me.blur();
-            var T = this;
-            setTimeout(function(){
-                T.$sliderWrapper.show();
-                T.reset();
-
-            },150)
-
+            this.$sliderWrapper.show();
+            this.reset();
         },
         hide: function () {
-            me.blur();
-            var T = this;
-            setTimeout(function(){
-                T.$sliderWrapper.hide();
-//                T.$sliderContainer.slider('destroy');
+            this.$sliderWrapper.hide();
+            this.$sliderContainer.slider('destroy');
 
-            },50)
 
         }
     }
@@ -121,11 +112,24 @@ UM.plugins['imageslider'] = function () {
     });
 
     me.addListener('ready', function () {
+
         /* 点击编辑区域时，触发显示幻灯的事件 */
-        me.$body.on('tap', function (e) {
+        me.$body.on('touchend', function (e) {
+
+        });
+//        me.addListener('focus', function(e){
+//            return false;
+//        });
+//
+
+
+        me.$body.on('tap',function(e){
             var $target = $(e.target);
+            var rng = me.selection.getRange();
+
             if ($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
                 // 设置现实幻灯在第几张图片
+                me.blur();
                 slideToIndex = 0;
                 me.$body.find('img.slider').each(function(index, img){
                     if(img == $target[0]) slideToIndex = index;
@@ -133,45 +137,11 @@ UM.plugins['imageslider'] = function () {
 
                 me.fireEvent('hidepopup');
                 me.fireEvent('showimageslider', e.target);
-                me.blur();
-                domUtils.preventDefault(e);
-                return false;
-        }
-        });
-        me.addListener('focus', function(e){
-            return false;
-        });
 
-//        var orgOffset,x= 0,y=0;
-//        me.$body.on('touchstart',function(e){
-//            var target = e.target;
-//            if(target.nodeName == 'IMG'){
-//                orgOffset = {
-//                    x : e.pageX,
-//                    y : e.pageY
-//                }
-//
-//            }
-//        }).on('touchmove',function(e){
-//                if(orgOffset){
-//                    x += Math.abs(e.pageX - orgOffset.x);
-//                    y += Math.abs(e.pageY - orgOffset.y);
-//                    orgOffset.x = e.pageX;
-//                    orgOffset.y = e.pageY;
-//                }
-//
-//            })
-//
-//        me.$body.on('touchend',function(e){
-//            var target = e.target;
-//            if(target.nodeName == 'IMG' && orgOffset){
-//                if(x > 100 || y > 100){
-//                    var rng = me.selection.getRange();
-//                    rng.insertNode(target);
-//                    rng.setStartAfter(target).collapse(true).select()
-//                }
-//
-//            }
-//        })
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        })
     });
 };

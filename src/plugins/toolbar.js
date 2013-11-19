@@ -81,7 +81,7 @@ UM.plugins.toolbar = function(){
                 me.blur();
             });
 
-            $toolbar.find('.edui-btn-emotion').tap(function(){
+            $toolbar.find('.edui-btn-emotion').click(function(){
                 me.execCommand('insertHtml', '<span id="_me_emotion" style="width:20px;height:20px;border:1px solid #ccc;display:inline-block"></span>',false,true);
 
                 $('<img src="http://bs.baidu.com/uploadimg/86961384265701.gif" style="display:none;"/>').appendTo(document.body)

@@ -610,7 +610,7 @@
             var $input = $('<input>').css({position:'absolute', top:window.pageY+10,left:10, zIndex: -2}).appendTo(document.body);
             $input.focus();
             $input.remove();
-            this.fireEvent('blur');
+//            this.fireEvent('blur');
         },
         /**
          * 判断编辑器当前是否获得了焦点
