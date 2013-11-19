@@ -17,10 +17,7 @@ UM.plugins['imageslider'] = function () {
             var _this = this;
 
             this.$sliderContainer = $('<div>').css({ width: $(me.window).width(), height: $(me.window).height() - 36 });
-//            setTimeout(function(){
-//                alert(window.innerHeight)
-//                _this.$sliderContainer.height(window.innerHeight);
-//            },100)
+
             var $backIcon = $('<a class="ui-icon-back">返回</a>'),
                 $pageBar = $('<span class="ui-pagebar">1/4</span>'),
                 $deleteIcon = $('<a class="ui-icon-delete">删除</a>'),
@@ -44,7 +41,7 @@ UM.plugins['imageslider'] = function () {
             });
 
             this.$sliderWrapper = $('<div class="edui-slider-wrapper">').css({
-                    'z-index': (me.getOpt('zIndex') + 1000001),position: 'absolute', top: '0', left: '0', width: '100%', height: '100%'
+                    'z-index': (me.getOpt('zIndex') + 1000001),position: 'absolute', top: '0', left: '0'
                 }).hide().on('swipeUp swipeDown', function(){
                     return false;
                 });
@@ -92,13 +89,24 @@ UM.plugins['imageslider'] = function () {
             this.$pageBar.text( (index + 1) + '/' + me.$body.find('img.slider').length );
         },
         show: function () {
-            this.$sliderWrapper.show();
-            this.reset();
+            me.blur();
+            var T = this;
+            setTimeout(function(){
+                T.$sliderWrapper.show();
+                T.reset();
+
+            },150)
+
         },
         hide: function () {
-            this.$sliderWrapper.hide();
-            this.$sliderContainer.slider('destroy');
             me.blur();
+            var T = this;
+            setTimeout(function(){
+                T.$sliderWrapper.hide();
+//                T.$sliderContainer.slider('destroy');
+
+            },50)
+
         }
     }
 
@@ -114,7 +122,7 @@ UM.plugins['imageslider'] = function () {
 
     me.addListener('ready', function () {
         /* 点击编辑区域时，触发显示幻灯的事件 */
-        me.$body.on('touchstart', function (e) {
+        me.$body.on('tap', function (e) {
             var $target = $(e.target);
             if ($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
                 // 设置现实幻灯在第几张图片
@@ -134,36 +142,36 @@ UM.plugins['imageslider'] = function () {
             return false;
         });
 
-        var orgOffset,x= 0,y=0;
-        me.$body.on('touchstart',function(e){
-            var target = e.target;
-            if(target.nodeName == 'IMG'){
-                orgOffset = {
-                    x : e.pageX,
-                    y : e.pageY
-                }
-
-            }
-        }).on('touchmove',function(e){
-                if(orgOffset){
-                    x += Math.abs(e.pageX - orgOffset.x);
-                    y += Math.abs(e.pageY - orgOffset.y);
-                    orgOffset.x = e.pageX;
-                    orgOffset.y = e.pageY;
-                }
-
-            })
-
-        me.$body.on('touchend',function(e){
-            var target = e.target;
-            if(target.nodeName == 'IMG' && orgOffset){
-                if(x > 100 || y > 100){
-                    var rng = me.selection.getRange();
-                    rng.insertNode(target);
-                    rng.setStartAfter(target).collapse(true).select()
-                }
-
-            }
-        })
+//        var orgOffset,x= 0,y=0;
+//        me.$body.on('touchstart',function(e){
+//            var target = e.target;
+//            if(target.nodeName == 'IMG'){
+//                orgOffset = {
+//                    x : e.pageX,
+//                    y : e.pageY
+//                }
+//
+//            }
+//        }).on('touchmove',function(e){
+//                if(orgOffset){
+//                    x += Math.abs(e.pageX - orgOffset.x);
+//                    y += Math.abs(e.pageY - orgOffset.y);
+//                    orgOffset.x = e.pageX;
+//                    orgOffset.y = e.pageY;
+//                }
+//
+//            })
+//
+//        me.$body.on('touchend',function(e){
+//            var target = e.target;
+//            if(target.nodeName == 'IMG' && orgOffset){
+//                if(x > 100 || y > 100){
+//                    var rng = me.selection.getRange();
+//                    rng.insertNode(target);
+//                    rng.setStartAfter(target).collapse(true).select()
+//                }
+//
+//            }
+//        })
     });
 };
