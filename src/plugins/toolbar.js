@@ -102,7 +102,6 @@ UM.plugins.toolbar = function(){
             $toolbar.find('.edui-btn-record').click(function(){ });
             $toolbar.find('.edui-btn-remind').click(function(){
                 me.execCommand('inserthtml', '<a href="http://tieba.baidu.com/home/main?un=ueditor">@ueditor</a>&nbsp;');
-                me.blur();
             });
         }
     }
