@@ -6,13 +6,16 @@ UM.plugins.toolbar = function(){
         var _this = this;
 
         /* 初始化靓俩个dom元素 */
-        this.$menu = $('<div class="edui-menu" style="z-index:100000">').hide().appendTo(me.document.body);
+        this.$menu = $('<div class="edui-menu" style="z-index:' + (me.getOpt('zIndex') + 100000) + '">').hide().appendTo(me.document.body);
         this.$toolbar = $('<div class="edui-toolbar">').hide().appendTo(me.document.body);
 
         /* menu按钮的点击事件 */
         this.toolbarState = false;
-        this.$menu.on('tap', function(e){
-            _this.toolbarState ? _this.hideToolbar():_this.showToolbar();
+        this.$menu.on('click', function(e){
+            _this.showToolbar();
+
+//            domUtils.preventDefault(e);
+
             var range = me.selection.getRange();
             me._bakRange = range;
             var $input = $('<input>').hide().appendTo(document.body);
@@ -20,6 +23,7 @@ UM.plugins.toolbar = function(){
             setTimeout(function(){
                 $input.remove()
             })
+//            return false;
         });
 
         /* 初始化toolbar */
@@ -88,16 +92,22 @@ UM.plugins.toolbar = function(){
                     })
 
             });
-                $toolbar.find('.edui-btn-record').click(function(){ });
+            $toolbar.find('.edui-btn-record').click(function(){ });
             $toolbar.find('.edui-btn-remind').click(function(){
                 me.execCommand('inserthtml', '<a href="http://tieba.baidu.com/home/main?un=ueditor">@ueditor</a>&nbsp;');
             });
         }
     }
     Menu.prototype = {
-        show: function (top, left) {
+        updatePositon: function(){
+            var top = window.pageYOffset + 5,
+                left = $(window).width() - 37;
+        },
+        show: function () {
             this.hideToolbar();
 
+            var top = window.pageYOffset + 5,
+                left = $(window).width() - 37;
             /* 显示menu */
             this.$menu.css({
                 top: top,
@@ -105,8 +115,8 @@ UM.plugins.toolbar = function(){
             }).show();
             /* 设置toolbar的位置 */
             this.$toolbar.css({
-                top: top + 30,
-                left: Math.max(0, Math.min(left + 10, $(me.document).width() - 170))
+                top: top,
+                left: Math.max(0, Math.min(left + 10, $(me.document).width() - 182))
             });
 
         },
@@ -116,6 +126,7 @@ UM.plugins.toolbar = function(){
         },
         showToolbar: function(){
             this.toolbarState = true;
+            this.$menu.hide();
             this.$toolbar.show();
         },
         hideToolbar: function(){
@@ -151,9 +162,12 @@ UM.plugins.toolbar = function(){
 
     me.addListener('showpopup', function (type, top, left) {
         menu = menu || new Menu();
-        menu.show(top - 7, left + 3);
+        menu.show();
     });
     me.addListener('hidepopup', function (type, top, left) {
         menu && menu.hide();
+    });
+    $(me.document).on('scroll', function (type, top, left) {
+        menu && menu.updatePositon();
     });
 };
