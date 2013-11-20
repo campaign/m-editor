@@ -20,7 +20,8 @@
             'plugins/insertimages.js',
             'plugins/cursor.js',
             'plugins/imageslider.js',
-            'plugins/toolbar.js'
+            'plugins/toolbar.js',
+            'plugins/keystrokes.js'
         ],
         baseURL = 'src/';
     for (var i=0,pi;pi = paths[i++];) {
