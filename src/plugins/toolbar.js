@@ -14,15 +14,20 @@ UM.plugins.toolbar = function(){
     function Menu(){
         var _this = this;
 
-        /* 初始化靓俩个dom元素 */
-        this.$menu = $('<div class="edui-menu" style="z-index:' + (me.getOpt('zIndex') + 100000) + '">').hide().appendTo(me.document.body);
+        /* 初始化俩个dom元素 */
+        this.$menu = $('<div class="edui-menu" style="z-index:' + (me.getOpt('zIndex') + 100000) + '"><span class="edui-menu-plus"></div>').hide().appendTo(me.document.body);
         this.$toolbar = $('<div class="edui-toolbar">').hide().appendTo(me.document.body);
 
         /* menu按钮的点击事件 */
         this.toolbarState = false;
         this.$menu.on('click', function(e){
-            _this.showToolbar();
-            me.blur();
+            if(_this.toolbarState) {
+                _this.$menu.removeClass('edui-menu-active');
+                _this.hideToolbar();
+            } else {
+                _this.$menu.addClass('edui-menu-active');
+                _this.showToolbar();
+            }
         });
 
         /* 初始化toolbar */
@@ -68,7 +73,6 @@ UM.plugins.toolbar = function(){
                 me.blur();
             });
 
-
             $toolbar.find('.edui-btn-record input[type=file]').change(function(e){
                 sendFile(e, function(xhr){
                     var data = xhr.responseText;
@@ -102,28 +106,26 @@ UM.plugins.toolbar = function(){
             $toolbar.find('.edui-btn-record').click(function(){ });
             $toolbar.find('.edui-btn-remind').click(function(){
                 me.execCommand('inserthtml', '<a href="http://tieba.baidu.com/home/main?un=ueditor">@ueditor</a>&nbsp;');
-                me.blur();
             });
         }
     }
     Menu.prototype = {
         updatePositon: function(){
-            var top = window.pageYOffset + 6,
-                right = 4;
             /* 显示menu */
             this.$menu.css({
-                top: top,
-                right: right
+                top: window.pageYOffset + 6,
+                right: 4
             });
             /* 设置toolbar的位置 */
             this.$toolbar.css({
-                top: top,
-                right: right
+                top: window.pageYOffset + window.innerHeight - 41,
+                right: 0
             });
         },
         show: function () {
             this.hideToolbar();
             this.updatePositon();
+            this.$menu.removeClass('edui-menu-active');
             this.$menu.show();
         },
         hide: function () {
@@ -132,7 +134,7 @@ UM.plugins.toolbar = function(){
         },
         showToolbar: function(){
             this.toolbarState = true;
-            this.$menu.hide();
+            this.updatePositon();
             this.$toolbar.show();
         },
         hideToolbar: function(){

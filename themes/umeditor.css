@@ -1,54 +1,94 @@
 .edui-btn {
     padding:0;
     margin:0;
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
     display: inline-block;
     overflow: hidden;
     background: url(./images/icons.png) no-repeat;
-    -webkit-background-size: auto 34px;
+    -webkit-background-size: auto 40px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .edui-btn-photo {
     background-position: 0px 0px;
 }
 .edui-btn-camera {
-    background-position: -34px 0px;
+    background-position: -40px 0px;
 }
 .edui-btn-record {
-    background-position: -68px 0px;
+    background-position: -80px 0px;
 }
 .edui-btn-emotion {
-    background-position: -102px 0px;
+    background-position: -120px 0px;
 }
 .edui-btn-remind {
-    background-position: -136px 0px;
+    background-position: -160px 0px;
 }
 .edui-btn input{
     padding:0;
     margin:0;
     width: 34px;
-    height: 34px;
+    height: 40px;
     position: relative;
     opacity: 0;
-    font-size: 34px;
+    font-size: 40px;
 }
 
+/* .edui-menu */
 .edui-menu{
     position: absolute;
-    width: 34px;
-    height: 34px;
-    border-radius: 17px;
-    background-image: url(./images/menu.png);
-    -webkit-background-size: auto 34px;
+    /*width: 40px;*/
+    /*height: 40px;*/
+    /*border-radius: 20px;*/
+    /*background-image: url(./images/menu.png);*/
+    /*-webkit-background-size: auto 40px;*/
+
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background: #0b8feb -webkit-gradient(linear,0 0,0 100%,from(#159bf8),to(#0081dc));
+    -webkit-box-shadow: 0 1px 2px 1px rgba(0,0,0,0.2);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-transition: -webkit-transform 1s ease;
 }
+.edui-menu-plus{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    -webkit-transition: -webkit-transform 400ms ease;
+}
+.edui-menu-plus:before,
+.edui-menu-plus:after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    left: 50%;
+    top: 50%;
+}
+.edui-menu-plus:before {
+    width: 4px;
+    height: 18px;
+    margin: -9px 0 0 -2px;
+}
+.edui-menu-plus:after {
+    width: 18px;
+    height: 4px;
+    margin: -2px 0 0 -9px;
+}
+.edui-menu-active .edui-menu-plus{
+    -webkit-transform:rotate(315deg);
+}
+
+/* edui-toolbar */
 .edui-toolbar{
     position: absolute;
-    width: 170px;
-    height: 34px;
+    width: 100%;
+    height: 42px;
     padding: 0px 6px;
-    border-radius: 3px;
-    border: 1px #a6a6a6 solid;
+    /*border-radius: 3px;*/
+    border-top: 1px #a6a6a6 solid;
     background-color: #f2f2f2;
+    text-align: right;
 }
 .edui-slider-wrapper{
     overflow: hidden;
