@@ -113,15 +113,6 @@ UM.plugins['imageslider'] = function () {
 
     me.addListener('ready', function () {
 
-        /* 点击编辑区域时，触发显示幻灯的事件 */
-        me.$body.on('touchend', function (e) {
-
-        });
-//        me.addListener('focus', function(e){
-//            return false;
-//        });
-//
-
 
         me.$body.on('tap',function(e){
             var $target = $(e.target);
