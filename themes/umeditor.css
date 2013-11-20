@@ -95,7 +95,7 @@
     -webkit-background-size: auto 44px;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-.edui-btn span input{
+.edui-btn input{
     padding:0;
     margin:0;
     width: 44px;
