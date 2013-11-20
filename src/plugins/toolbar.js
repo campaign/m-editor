@@ -128,7 +128,7 @@ UM.plugins.toolbar = function(){
             });
             /* 设置toolbar的位置 */
             this.$toolbar.css({
-                top: window.pageYOffset + window.innerHeight - 41,
+                top: window.pageYOffset + window.innerHeight - 44,
                 right: 0
             });
         },
