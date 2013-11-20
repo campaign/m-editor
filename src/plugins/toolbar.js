@@ -21,13 +21,17 @@ UM.plugins.toolbar = function(){
         /* menu按钮的点击事件 */
         this.toolbarState = false;
         this.$menu.on('click', function(e){
-            if(_this.toolbarState) {
-                _this.$menu.removeClass('edui-menu-active');
-                _this.hideToolbar();
-            } else {
-                _this.$menu.addClass('edui-menu-active');
-                _this.showToolbar();
-            }
+
+            setTimeout(function(){
+                if(_this.toolbarState) {
+                    _this.$menu.removeClass('edui-menu-active');
+                    _this.hideToolbar();
+                } else {
+                    _this.$menu.addClass('edui-menu-active');
+                    _this.showToolbar();
+                }
+            },50)
+
         });
 
         /* 初始化toolbar */
@@ -188,6 +192,7 @@ UM.plugins.toolbar = function(){
         setTimeout(function(){
             if(me.isFocus()){
                 menu && menu.show();
+                menu && menu.updatePositon()
             }
 
         },2000)
