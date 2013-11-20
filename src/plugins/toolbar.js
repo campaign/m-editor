@@ -178,7 +178,6 @@ UM.plugins.toolbar = function(){
         menu && menu.hide();
     });
     $(window).on('scroll', function (type, top, left) {
-//        console.log(scroll);
         menu && menu.hide();
         setTimeout(function(){
             if(me.isFocus()){
@@ -187,4 +186,10 @@ UM.plugins.toolbar = function(){
 
         },2000)
     });
+    me.ready(function(){
+        $(me.body).on('blur',function(){
+            menu.updatePositon();
+        })
+    })
+
 };

@@ -151,7 +151,7 @@ UM.plugins['imageslider'] = function () {
             }
             setTimeout(function(){
                 rng.select();
-            })
+            },0)
         }
         function getPreImg(node){
             while(node && domUtils.isWhitespace(node)){
@@ -159,13 +159,13 @@ UM.plugins['imageslider'] = function () {
             }
             return node;
         }
-        var startX = 0, startY = 0,deltaX = 0 ,deltaY = 0;
+        var startX = 0, startY = 0,deltaX = 0 ,deltaY = 0,startTimer = 0,endTimer = 0;
         me.$body.on('touchstart',function(e){
             if(e.target.nodeName == 'IMG'){
                 var touch = e.touches[0];
                 startX = touch.pageX;
                 startY = touch.pageY;
-
+                startTimer = +new Date;
             }
         }).on('touchmove',function(e){
                 if(e.target.nodeName == 'IMG'){
@@ -178,8 +178,8 @@ UM.plugins['imageslider'] = function () {
 
         }).on('touchend',function(e){
                 if(e.target.nodeName == 'IMG'){
-                    console.log(deltaX + ':' + deltaY)
-                    if(deltaX > 50 || deltaY > 50){
+                    endTimer = +new Date;
+                    if((deltaX > 50 || deltaY > 50) && endTimer - startTimer > 1500){
                         insertImage(e.target,me.selection.getRange());
                                     console.log('move')
                     }

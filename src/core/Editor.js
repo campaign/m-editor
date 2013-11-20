@@ -321,7 +321,7 @@
                 me.container = cont.parentNode;
             }
 
-            me._bindshortcutKeys();
+
             me.isReady = 1;
             me.fireEvent('ready');
             options.onready && options.onready.call(me);
@@ -391,41 +391,7 @@
             this.$container && this.$container.width(width);
             $(this.body).width(width - $(this.body).css('padding-left').replace('px','') * 1 - $(this.body).css('padding-right').replace('px','') * 1)
         },
-        addshortcutkey: function (cmd, keys) {
-            var obj = {};
-            if (keys) {
-                obj[cmd] = keys
-            } else {
-                obj = cmd;
-            }
-            utils.extend(this.shortcutkeys, obj)
-        },
-        _bindshortcutKeys: function () {
-            var me = this, shortcutkeys = this.shortcutkeys;
-            me.addListener('keydown', function (type, e) {
-                var keyCode = e.keyCode || e.which;
-                for (var i in shortcutkeys) {
-                    var tmp = shortcutkeys[i].split(',');
-                    for (var t = 0, ti; ti = tmp[t++];) {
-                        ti = ti.split(':');
-                        var key = ti[0], param = ti[1];
-                        if (/^(ctrl)(\+shift)?\+(\d+)$/.test(key.toLowerCase()) || /^(\d+)$/.test(key)) {
-                            if (( (RegExp.$1 == 'ctrl' ? (e.ctrlKey || e.metaKey) : 0)
-                                && (RegExp.$2 != "" ? e[RegExp.$2.slice(1) + "Key"] : 1)
-                                && keyCode == RegExp.$3
-                                ) ||
-                                keyCode == RegExp.$1
-                                ) {
-                                if (me.queryCommandState(i,param) != -1)
-                                    me.execCommand(i, param);
-                                domUtils.preventDefault(e);
-                            }
-                        }
-                    }
 
-                }
-            });
-        },
         /**
          * 获取编辑器内容
          * @name getContent
@@ -627,16 +593,20 @@
             var me = this,
                 cont = me.body;
             me._proxyDomEvent = utils.bind(me._proxyDomEvent, me);
-            domUtils.on(cont, ['click', 'contextmenu', 'mousedown', 'keydown', 'keyup', 'keypress', 'mouseup', 'mouseover', 'mouseout', 'selectstart'], me._proxyDomEvent);
+            domUtils.on(cont, ['click','keydown', 'keyup', 'keypress'], me._proxyDomEvent);
             domUtils.on(cont, ['focus', 'blur'], me._proxyDomEvent);
-            domUtils.on(cont, ['mouseup', 'keydown'], function (evt) {
-                //特殊键不触发selectionchange
-                if (evt.type == 'keydown' && (evt.ctrlKey || evt.metaKey || evt.shiftKey || evt.altKey)) {
-                    return;
-                }
-                if (evt.button == 2)return;
-                me._selectionChange(250, evt);
-            });
+//            domUtils.on(cont, ['mouseup', 'keydown'], function (evt) {
+//                //特殊键不触发selectionchange
+//                if (evt.type == 'keydown' && (evt.ctrlKey || evt.metaKey || evt.shiftKey || evt.altKey)) {
+//                    return;
+//                }
+//                if (evt.button == 2)return;
+//                me._selectionChange(250, evt);
+//            });
+
+            $(me.body).on('touchstart',function(e){
+                me.selection.getRange().select()
+            })
         },
         /**
          * 触发事件代理
