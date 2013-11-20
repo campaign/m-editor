@@ -31,11 +31,22 @@ UM.plugins.toolbar = function(){
         });
 
         /* 初始化toolbar */
-        this.$toolbar.html('<a href="javascript:void(0)" class="edui-btn edui-btn-photo"><input type="file" name="photo" id="photo" accept="image/*" multiple="multiple" /></a>' +
-            '<a href="javascript:void(0)" class="edui-btn edui-btn-camera"><input type="file" name="camera" id="camera" accept="image/*" /></a>' +
-            '<a href="javascript:void(0)" class="edui-btn edui-btn-emotion"></a>' +
-            '<a href="javascript:void(0)" class="edui-btn edui-btn-record"></a>' +
-            '<a href="javascript:void(0)" class="edui-btn edui-btn-remind"></a>');
+        this.$toolbar.html('<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-photo"><input type="file" name="photo" id="photo" accept="image/*" multiple="multiple" /></span></a>' +
+            '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-camera"><input type="file" name="camera" id="camera" accept="image/*" /></span></a>' +
+            '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-emotion"></span></a>' +
+            '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-record"></span></a>' +
+            '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-remind"></span></a>');
+
+        this.$toolbar.find('.edui-btn').on('touchstart', function(){
+                var $target = $(this);
+                $(this).addClass('edui-btn-active');
+                setTimeout(function(){
+//                    $target.removeClass('edui-btn-active');
+                }, 100);
+            }).on('touchend', function(){
+                var $target = $(this);
+                $target.removeClass('edui-btn-active');
+            });
 
         /* 初始化toolbar上按钮的事件 */
         initToolBarEvent();
@@ -129,8 +140,8 @@ UM.plugins.toolbar = function(){
             this.$menu.show();
         },
         hide: function () {
-            this.$menu.hide();
-            this.hideToolbar();
+//            this.$menu.hide();
+//            this.hideToolbar();
         },
         showToolbar: function(){
             this.toolbarState = true;
