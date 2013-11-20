@@ -38,14 +38,9 @@ UM.plugins.toolbar = function(){
             '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-remind"></span></a>');
 
         this.$toolbar.find('.edui-btn').on('touchstart', function(){
-                var $target = $(this);
                 $(this).addClass('edui-btn-active');
-                setTimeout(function(){
-//                    $target.removeClass('edui-btn-active');
-                }, 100);
             }).on('touchend', function(){
-                var $target = $(this);
-                $target.removeClass('edui-btn-active');
+                $(this).removeClass('edui-btn-active');
             });
 
         /* 初始化toolbar上按钮的事件 */
