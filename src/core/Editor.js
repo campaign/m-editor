@@ -607,9 +607,8 @@
             var me = this,
                 range = me.selection.getRange();
             me._bakRange = range;
-            var $input = $('<input type="button">').css({position:'absolute', top:window.pageY+10,left:10, zIndex: -2}).appendTo(document.body);
-            $input.focus();
-            $input.remove();
+            $('<input type="hidden">').css({position:'absolute', top:window.pageY+10,left:10, zIndex: -2}).appendTo(document.body).focus().remove();
+
 //            this.fireEvent('blur');
         },
         /**

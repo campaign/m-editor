@@ -113,35 +113,81 @@ UM.plugins['imageslider'] = function () {
 
     me.addListener('ready', function () {
 
-        /* 点击编辑区域时，触发显示幻灯的事件 */
-        me.$body.on('touchend', function (e) {
 
-        });
-//        me.addListener('focus', function(e){
-//            return false;
-//        });
+//        me.$body.on('tap',function(e){
+//            var $target = $(e.target);
+//            var rng = me.selection.getRange();
 //
+//            if ($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
+//                // 设置现实幻灯在第几张图片
+//                me.blur();
+//                slideToIndex = 0;
+//                me.$body.find('img.slider').each(function(index, img){
+//                    if(img == $target[0]) slideToIndex = index;
+//                });
+//
+//                me.fireEvent('hidepopup');
+//                me.fireEvent('showimageslider', e.target);
+//
+//                e.preventDefault();
+//                e.stopPropagation();
+//                return false;
+//            }
+//        })
 
+        function insertImage(img,rng){
+            rng.trimBoundary();
+            var start = getPreImg(rng.startContainer.childNodes[rng.startOffset]||rng.startContainer.childNodes[rng.startOffset-1]);
+            if(start && start.nodeName != 'IMG'){
+                var bk = rng.createBookmark();
+                domUtils.breakParent(bk.start,rng.startContainer);
+                var $newline = $('<p></p>');
+                $newline.insertBefore(bk.start);
+                $newline.append(img);
+                rng.moveToBookmark(bk).setStartAfter(img).collapse(true);
 
-        me.$body.on('tap',function(e){
-            var $target = $(e.target);
-            var rng = me.selection.getRange();
-
-            if ($target.attr('tagName') == 'IMG' && $target.hasClass('slider')) {
-                // 设置现实幻灯在第几张图片
-                me.blur();
-                slideToIndex = 0;
-                me.$body.find('img.slider').each(function(index, img){
-                    if(img == $target[0]) slideToIndex = index;
-                });
-
-                me.fireEvent('hidepopup');
-                me.fireEvent('showimageslider', e.target);
-
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
+            }else{
+                rng.insertNode(img).setStartAfter(img).collapse(true);
             }
+            setTimeout(function(){
+                rng.select();
+            })
+        }
+        function getPreImg(node){
+            while(node && domUtils.isWhitespace(node)){
+                node = node.previousSibling
+            }
+            return node;
+        }
+        var startX = 0, startY = 0,deltaX = 0 ,deltaY = 0;
+        me.$body.on('touchstart',function(e){
+            if(e.target.nodeName == 'IMG'){
+                var touch = e.touches[0];
+                startX = touch.pageX;
+                startY = touch.pageY;
+
+            }
+        }).on('touchmove',function(e){
+                if(e.target.nodeName == 'IMG'){
+                    var touch = e.touches[0];
+                    deltaX = Math.abs(startX - touch.pageX);
+                    deltaY = Math.abs(startY - touch.pageY);
+
+                }
+
+
+        }).on('touchend',function(e){
+                if(e.target.nodeName == 'IMG'){
+                    console.log(deltaX + ':' + deltaY)
+                    if(deltaX > 50 || deltaY > 50){
+                        insertImage(e.target,me.selection.getRange());
+                                    console.log('move')
+                    }
+                    deltaY = 0;
+                    deltaX = 0;
+                }
+
         })
+
     });
 };
