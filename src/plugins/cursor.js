@@ -16,13 +16,37 @@ UM.plugins.cursor = function(){
         me.fireEvent('hidepopup')
     });
     me.ready(function(){
-        me.$body.on('compositionstart',function(){
+//        me.$body.on('compositionstart',function(){
+//
+//            me.fireEvent('compositionchange',true)
+//        });
+//        me.$body.on('compositionend',function(){
+//
+//            me.fireEvent('compositionchange',false)
+//        })
 
-            me.fireEvent('compositionchange',true)
-        });
-        me.$body.on('compositionend',function(){
-
-            me.fireEvent('compositionchange',false)
+        me.$body.on('swipeLeft',function(){
+           var rng = me.selection.getRange();
+            var preOffset = rng.startOffset -1;
+            if(preOffset < 0){
+                rng.setStart(rng.startContainer.previousSibling,rng.startContainer.previousSibling.nodeValue.length-2)
+            }else{
+                rng.setStart(rng.startContainer,rng.startOffset -1)
+            }
+            rng.collapse(true).select();
         })
+
+        me.$body.on('swipeRight',function(){
+            var rng = me.selection.getRange();
+            var preOffset = rng.startOffset +1;
+            if(preOffset == rng.startContainer.nodeValue.length){
+                rng.setStart(rng.startContainer.nextSibling,1)
+            }else{
+                rng.setStart(rng.startContainer,rng.startOffset +1)
+            }
+            rng.collapse(true).select();
+
+        })
+
     });
 };
