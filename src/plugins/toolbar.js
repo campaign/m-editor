@@ -10,13 +10,13 @@ UM.plugins.toolbar = function(){
         $input.remove()
 
     }
-
     function Menu(){
+
         var _this = this;
 
         /* 初始化俩个dom元素 */
         this.$menu = $('<div class="edui-menu" style="z-index:' + (me.getOpt('zIndex') + 100000) + '"><span class="edui-menu-plus"></div>').hide().appendTo(me.document.body);
-        this.$toolbar = $('<div class="edui-toolbar">').hide().appendTo(me.document.body);
+        this.$toolbar = $('<div class="edui-toolbar" style="position:fixed;">').hide().appendTo(me.document.body);
 
         /* menu按钮的点击事件 */
         this.toolbarState = false;
@@ -119,28 +119,39 @@ UM.plugins.toolbar = function(){
             });
         }
     }
+    var lastpageYOffset = 0;
     Menu.prototype = {
         updatePositon: function(){
-            /* 显示menu */
-            this.$menu.css({
-                top: window.pageYOffset + 6,
-                right: 4
-            });
             /* 设置toolbar的位置 */
-            this.$toolbar.css({
-                top: window.pageYOffset + window.innerHeight - 44,
-                right: 0
-            });
+
+            var top = me.$body.offset().top;
+            if(window.pageYOffset <= top - 47){
+
+                this.$toolbar.css({
+                    top: top - 47,// + (/^7/.test($.os.version) ? 210 : 156) - (isShowState ? (/^7/.test($.os.version) ? 35 : 42) : 0),
+                    right: 0
+                });
+            }else{
+
+                this.$toolbar.css({
+                    top: window.pageYOffset,// + (/^7/.test($.os.version) ? 210 : 156) - (isShowState ? (/^7/.test($.os.version) ? 35 : 42) : 0),
+                    right: 0,
+                    position:'absolute'
+                });
+            }
+            console.log('toolbar:' + this.$toolbar.offset().top)
+
         },
         show: function () {
-            this.hideToolbar();
+//            this.hideToolbar();
+            this.showToolbar();
             this.updatePositon();
-            this.$menu.removeClass('edui-menu-active');
-            this.$menu.show();
+//            this.$menu.removeClass('edui-menu-active');
+//            this.$menu.show();
         },
         hide: function () {
 //            this.$menu.hide();
-//            this.hideToolbar();
+            this.hideToolbar();
         },
         showToolbar: function(){
             this.toolbarState = true;
@@ -177,8 +188,26 @@ UM.plugins.toolbar = function(){
             if(hasImg) e.preventDefault();
         }
     }
-
+    var isShowState = false;
+//    me.addListener('compositionchange',function(cmdName,isShow){
+//        if(isShow){
+//            isShowState = true;
+////            menu.$toolbar.css({
+////                top: menu.$toolbar.offset().top - (/^7/.test($.os.version) ? 35 : 40)
+////
+////            });
+//        }else{
+//            isShowState = false;
+////            menu.$toolbar.css({
+////                top: menu.$toolbar.offset().top + (/^7/.test($.os.version) ? 35 : 40)
+////
+////            });
+//        }
+//        menu.updatePositon();
+//
+//    })
     me.addListener('showpopup', function (type, top, left) {
+
         menu = menu || new Menu();
         if(me.isFocus()){
             menu.show();
@@ -187,20 +216,18 @@ UM.plugins.toolbar = function(){
     me.addListener('hidepopup', function (type, top, left) {
         menu && menu.hide();
     });
+
     $(window).on('scroll', function (type, top, left) {
-        menu && menu.hide();
-        setTimeout(function(){
-            if(me.isFocus()){
-                menu && menu.show();
-                menu && menu.updatePositon()
+
+        if(me.isFocus()){
+
+            if(!menu.toolbarState){
+                menu.show()
+            }else{
+                menu.updatePositon()
             }
 
-        },2000)
+        }
     });
-    me.ready(function(){
-        $(me.body).on('blur',function(){
-            menu.updatePositon();
-        })
-    })
 
 };

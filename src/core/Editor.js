@@ -419,29 +419,7 @@
             me.fireEvent('aftergetcontent',root);
             return  root.toHtml(formatter);
         },
-        /**
-         * 取得完整的html代码，可以直接显示成完整的html文档
-         * @name getAllHtml
-         * @grammar editor.getAllHtml()  => String
-         */
-        getAllHtml: function () {
-            var me = this,
-                headHtml = [],
-                html = '';
-            me.fireEvent('getAllHtml', headHtml);
-            if (browser.ie && browser.version > 8) {
-                var headHtmlForIE9 = '';
-                utils.each(me.document.styleSheets, function (si) {
-                    headHtmlForIE9 += ( si.href ? '<link rel="stylesheet" type="text/css" href="' + si.href + '" />' : '<style>' + si.cssText + '</style>');
-                });
-                utils.each(me.document.getElementsByTagName('script'), function (si) {
-                    headHtmlForIE9 += si.outerHTML;
-                });
-            }
-            return '<html><head>' + (me.options.charset ? '<meta http-equiv="Content-Type" content="text/html; charset=' + me.options.charset + '"/>' : '')
-                + (headHtmlForIE9 || me.document.getElementsByTagName('head')[0].innerHTML) + headHtml.join('\n') + '</head>'
-                + '<body ' + (ie && browser.version < 9 ? 'class="view"' : '') + '>' + me.getContent(null, null, true) + '</body></html>';
-        },
+
         /**
          * 得到编辑器的纯文本内容，但会保留段落格式
          * @name getPlainTxt
@@ -551,6 +529,7 @@
          * @grammar editor.focus([toEnd])   //默认focus到编辑器头部，toEnd为true时focus到内容尾部
          */
         focus: function (toEnd) {
+
             try {
                 var me = this,
                     rng = me.selection.getRange();
@@ -604,9 +583,9 @@
 //                me._selectionChange(250, evt);
 //            });
 
-            $(me.body).on('touchstart',function(e){
-                me.selection.getRange().select()
-            })
+//            $(me.body).on('touchstart',function(e){
+//                me.selection.getRange().select()
+//            })
         },
         /**
          * 触发事件代理
@@ -695,15 +674,15 @@
          * @grammar editor.execCommand(cmdName)   => {*}
          */
         execCommand: function (cmdName) {
-            if(!this.isFocus()){
-                var bakRange = this.selection._bakRange;
-                if(bakRange){
-                    bakRange.select()
-                }else{
-                    this.focus(true)
-                }
-
-            }
+//            if(!this.isFocus()){
+//                var bakRange = this.selection._bakRange;
+//                if(bakRange){
+//                    bakRange.select()
+//                }else{
+//                    this.focus(true)
+//                }
+//
+//            }
             cmdName = cmdName.toLowerCase();
             var me = this,
                 result,

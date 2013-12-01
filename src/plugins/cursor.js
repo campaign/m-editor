@@ -8,32 +8,21 @@ UM.plugins.cursor = function(){
         rng.moveToBookmark(bk).select();
         return offset;
     }
-    me.addListener('keydown',function(e){
-        me.fireEvent('hidepopup');
-        clearTimeout(showtimer);
+    me.addListener('focus',function(e){
+        me.fireEvent('showpopup')
     });
-    me.addListener('keyup afterinserthtml focus',function(e){
-        me.fireEvent('hidepopup');
-        clearTimeout(showtimer);
-        showtimer = setTimeout(function(){
-            var offset = getOffset();
-            me.fireEvent('showpopup',offset.top,offset.left)
-        },1000)
-    });
+    me.addListener('blur',function(e){
 
+        me.fireEvent('hidepopup')
+    });
     me.ready(function(){
-        me.$body.on('tap',function(e){
-            var $target = $(e.target);
-            if(!($target.attr('tagName') == 'IMG' && $target.hasClass('slider'))) {
-                me.fireEvent('hidepopup');
-                clearTimeout(showtimer);
-                showtimer = setTimeout(function(){
-                    var offset = getOffset();
-                    me.fireEvent('showpopup',offset.top,offset.left)
-                },1000)
-                e.preventDefault();
-                e.stopPropagation();
-            }
+        me.$body.on('compositionstart',function(){
+
+            me.fireEvent('compositionchange',true)
         });
+        me.$body.on('compositionend',function(){
+
+            me.fireEvent('compositionchange',false)
+        })
     });
 };
