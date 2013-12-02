@@ -216,18 +216,29 @@ UM.plugins.toolbar = function(){
     me.addListener('hidepopup', function (type, top, left) {
         menu && menu.hide();
     });
-
+    var timer;
+   me.ready(function(){
+       var timer2;
+       me.$body.on('touchmove',function(e){
+           menu.hide()
+       })
+   })
     $(window).on('scroll', function (type, top, left) {
 
-        if(me.isFocus()){
+        clearTimeout(timer);
+        menu.hide()
+        timer = setTimeout(function(){
+            if(me.isFocus()){
 
-            if(!menu.toolbarState){
-                menu.show()
-            }else{
-                menu.updatePositon()
+                if(!menu.toolbarState){
+                    menu.show()
+                }else{
+                    menu.updatePositon()
+                }
+
             }
+        },800)
 
-        }
     });
 
 };
