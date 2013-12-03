@@ -13,60 +13,12 @@
     <script src="lang/zh-cn/zh-cn.js"></script>
     <link rel="stylesheet" href="./themes/reset.css"/>
     <link rel="stylesheet" href="./themes/umeditor.css"/>
-
-    <style>
-        .editor_container{
-            margin: 5px;
-        }
-        .editor_input {
-            word-wrap: break-word;
-            -webkit-appearance: none;
-            -webkit-border-radius: 3px;
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            -webkit-box-sizing: border-box;
-            display: block;
-            font-size: 1em;
-            border: 1px solid #c6c6c6;
-            border-bottom: 1px solid #eaeaea;
-            font-weight: 600;
-            color: #999;
-            box-shadow: 0 0 5px #dfdfdf inset;
-            background: #fbfbfb
-        }
-        .editor_input p{
-            margin:0;
-            padding:0;
-        }
-        .editor_toolbar {
-            text-align: right;
-        }
-        /*.editor_submit {*/
-            /*position: relative;*/
-            /*right: 0px;*/
-            /*margin-top: 4px;*/
-            /*padding: 0 10px;*/
-            /*line-height: 30px;*/
-            /*display: inline-block;*/
-            /*text-decoration: none;*/
-            /*border: 1px solid #1e84db;*/
-            /*background: #2d90e4;*/
-            /*color: #fff;*/
-            /*border-radius: 5px;*/
-            /*box-shadow: 0 0 3px #bfc2c6;*/
-        /*}*/
-        #form{
-            display: inline-block;
-            float: right;
-        }
-    </style>
 </head>
 <body>
 <h1 class="pagebar">
     <span class="blank floatleft"></span>
     移动端富文本编辑器
-    <form action="show.php" id="form" method="post">
+    <form action="show.php" class="form" id="form" method="post">
     <input type="hidden" name="content" id="content" class="" />
     <a class="editor_submit floatright btn" id="submit">提交</a>
     </form>
@@ -91,12 +43,11 @@
         <p >
             <img src="http://weditor.duapp.com/php/upload/20131203/13860393112472.png" style="font-size: 1em;width: 60px;height: 60px;margin-right: 2px"/><img src="http://weditor.duapp.com/php/upload/20131203/13860393105095.png" style="font-size: 1em;width: 60px;height: 60px;margin-right: 2px"/><img src="http://weditor.duapp.com/php/upload/20131203/13860393134806.png" style="font-size: 1em;width: 60px;height: 60px;margin-right: 2px"/>
         </p>
-        <p>
-            <br/>
-        </p>
+    </div>
+    <div>
+        <a href="javascript:clear()" class="cleardoc">清空内容</a>
     </div>
 </div>
-<input type="text"/>
 <script>
     var editor = new UM.Editor();
     editor.render('editor');
@@ -105,6 +56,10 @@
         $('#content').val(editor.getContent());
         $('#form').submit();
     });
+
+    function clear(){
+        editor.setContent('');
+    }
 </script>
 
 </body>
