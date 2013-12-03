@@ -1,9 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
     <title>M-Editor内容展示页</title>
     <script src="third-party/zepto.js"></script>
+    <script src="third-party/gmu/gmu.js"></script>
+    <link rel="stylesheet" href="third-party/gmu/gmu.css"/>
+    <link rel="stylesheet" href="./themes/reset.css"/>
+    <link rel="stylesheet" href="./themes/umeditor.css"/>
     <style>
         .author .photo{
 
@@ -21,7 +26,6 @@
             -webkit-box-sizing: border-box;
             display: block;
             font-size: 1em;
-            border: 1px solid #c6c6c6;
             font-weight: 600;
             color: #999;
         }
@@ -33,7 +37,11 @@
 </head>
 <body>
 <div class="content">
-    <h1>内容展示页</h1>
+    <h1 class="pagebar">
+        <a class="floatleft btn" href="javascript:history.back();">返回</a>
+        内容展示页
+        <a class="editor_submit floatright btn" id="submit">编辑</a>
+    </h1>
     <div class="author">
         <img class="photo" src="http://weditor.duapp.com/php/upload/20131203/13860406433898.jpg" alt="" width="32" heigth="32"/>
         <span class="name">Jinqn</span>

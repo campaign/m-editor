@@ -1,60 +1,32 @@
 UM.plugins.toolbar = function(){
-    var me = this,
-        menu;
+    var me = this;
 
-    function hideKeyboard(){
-        var range = me.selection.getRange();
-        me._bakRange = range;
-        var $input = $('<input>').css({position:'absolute', top:window.pageY,left:0}).appendTo(document.body);
-        $input.focus();
-        $input.remove()
+    var Toolbar = function (){
+        this.init();
+        this.initEvent();
+    };
+    Toolbar.prototype = {
+        init: function(){
+            /* 初始化俩个dom元素 */
+            this.$root = $('<div class="edui-toolbar" style="position:fixed;">').hide().appendTo(me.document.body);
 
-    }
-    function Menu(){
+            /* 初始化toolbar */
+            this.$root.html('<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-photo"><input type="file" name="photo" id="photo" accept="image/*" multiple="multiple" /></span></a>' +
+                '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-camera"><input type="file" name="camera" id="camera" accept="image/*" /></span></a>' +
+                '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-emotion"></span></a>' +
+                '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-record"></span></a>' +
+                '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-remind"></span></a>');
+        },
+        initEvent: function(){
+            var $root = this.$root;
 
-        var _this = this;
+            $root.find('.edui-btn').on('touchstart', function(){
+                    $(this).addClass('edui-btn-active');
+                }).on('touchend', function(){
+                    $(this).removeClass('edui-btn-active');
+                });
 
-        /* 初始化俩个dom元素 */
-        this.$menu = $('<div class="edui-menu" style="z-index:' + (me.getOpt('zIndex') + 100000) + '"><span class="edui-menu-plus"></div>').hide().appendTo(me.document.body);
-        this.$toolbar = $('<div class="edui-toolbar" style="position:fixed;">').hide().appendTo(me.document.body);
-
-        /* menu按钮的点击事件 */
-        this.toolbarState = false;
-        this.$menu.on('click', function(e){
-
-            setTimeout(function(){
-                if(_this.toolbarState) {
-                    _this.$menu.removeClass('edui-menu-active');
-                    _this.hideToolbar();
-                } else {
-                    _this.$menu.addClass('edui-menu-active');
-                    _this.showToolbar();
-                }
-            },50)
-
-        });
-
-        /* 初始化toolbar */
-        this.$toolbar.html('<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-photo"><input type="file" name="photo" id="photo" accept="image/*" multiple="multiple" /></span></a>' +
-            '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-camera"><input type="file" name="camera" id="camera" accept="image/*" /></span></a>' +
-            '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-emotion"></span></a>' +
-            '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-record"></span></a>' +
-            '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-remind"></span></a>');
-
-        this.$toolbar.find('.edui-btn').on('touchstart', function(){
-                $(this).addClass('edui-btn-active');
-            }).on('touchend', function(){
-                $(this).removeClass('edui-btn-active');
-            });
-
-        /* 初始化toolbar上按钮的事件 */
-        initToolBarEvent();
-        function initToolBarEvent () {
-            var $toolbar = _this.$toolbar;
-            $toolbar.find('.edui-btn-photo input[type=file],.edui-btn-camera input[type=file]').change(function(e){
-                var i = 0,
-                    count = e.target.files && e.target.files.length,
-                    imgArr = [];
+            $root.find('.edui-btn-photo input[type=file],.edui-btn-camera input[type=file]').change(function(e){
 
                 var fileList = e.target.files,spans=[];
                 if(fileList) {
@@ -83,7 +55,7 @@ UM.plugins.toolbar = function(){
                 me.blur();
             });
 
-            $toolbar.find('.edui-btn-record input[type=file]').change(function(e){
+            $root.find('.edui-btn-record input[type=file]').change(function(e){
                 sendFile(e, function(xhr){
                     var data = xhr.responseText;
                     $('#message').html('response: ' + data);
@@ -95,7 +67,7 @@ UM.plugins.toolbar = function(){
                 me.blur();
             });
 
-            $toolbar.find('.edui-btn-emotion').click(function(){
+            $root.find('.edui-btn-emotion').click(function(){
                 me.execCommand('insertHtml', '<span id="_me_emotion" style="width:20px;height:20px;border:1px solid #ccc;display:inline-block"></span>',false,true);
 
                 $('<img src="http://bs.baidu.com/uploadimg/86961384265701.gif" style="display:none;"/>').appendTo(document.body)
@@ -113,54 +85,40 @@ UM.plugins.toolbar = function(){
                     });
 
             });
-            $toolbar.find('.edui-btn-record').click(function(){ });
-            $toolbar.find('.edui-btn-remind').click(function(){
+            $root.find('.edui-btn-record').click(function(){ });
+            $root.find('.edui-btn-remind').click(function(){
                 me.execCommand('inserthtml', '<a href="http://tieba.baidu.com/home/main?un=ueditor">@ueditor</a>&nbsp;');
             });
-        }
-    }
-    var lastpageYOffset = 0;
-    Menu.prototype = {
+        },
         updatePositon: function(){
             /* 设置toolbar的位置 */
 
             var top = me.$body.offset().top;
             if(window.pageYOffset <= top - 47){
 
-                this.$toolbar.css({
+                this.$root.css({
                     top: top - 47,// + (/^7/.test($.os.version) ? 210 : 156) - (isShowState ? (/^7/.test($.os.version) ? 35 : 42) : 0),
                     right: 0
                 });
             }else{
 
-                this.$toolbar.css({
+                this.$root.css({
                     top: window.pageYOffset,// + (/^7/.test($.os.version) ? 210 : 156) - (isShowState ? (/^7/.test($.os.version) ? 35 : 42) : 0),
                     right: 0,
                     position:'absolute'
                 });
             }
-            console.log('toolbar:' + this.$toolbar.offset().top)
 
         },
         show: function () {
-//            this.hideToolbar();
-            this.showToolbar();
-            this.updatePositon();
-//            this.$menu.removeClass('edui-menu-active');
-//            this.$menu.show();
-        },
-        hide: function () {
-//            this.$menu.hide();
-            this.hideToolbar();
-        },
-        showToolbar: function(){
             this.toolbarState = true;
             this.updatePositon();
-            this.$toolbar.show();
+            this.$root.show();
+            this.updatePositon();
         },
-        hideToolbar: function(){
+        hide: function () {
             this.toolbarState = false;
-            this.$toolbar.hide();
+            this.$root.hide();
         }
     }
 
@@ -188,57 +146,39 @@ UM.plugins.toolbar = function(){
             if(hasImg) e.preventDefault();
         }
     }
-    var isShowState = false;
-//    me.addListener('compositionchange',function(cmdName,isShow){
-//        if(isShow){
-//            isShowState = true;
-////            menu.$toolbar.css({
-////                top: menu.$toolbar.offset().top - (/^7/.test($.os.version) ? 35 : 40)
-////
-////            });
-//        }else{
-//            isShowState = false;
-////            menu.$toolbar.css({
-////                top: menu.$toolbar.offset().top + (/^7/.test($.os.version) ? 35 : 40)
-////
-////            });
-//        }
-//        menu.updatePositon();
-//
-//    })
-    me.addListener('showpopup', function (type, top, left) {
 
-        menu = menu || new Menu();
-        if(me.isFocus()){
-            menu.show();
-        }
-    });
-    me.addListener('hidepopup', function (type, top, left) {
-        menu && menu.hide();
-    });
-    var timer;
-   me.ready(function(){
-       var timer2;
-       me.$body.on('touchmove',function(e){
-           menu.hide()
-       })
-   })
-    $(window).on('scroll', function (type, top, left) {
+    me.ready(function(){
+        var timer,
+            toolbar = toolbar || new Toolbar();
 
-        clearTimeout(timer);
-        menu.hide()
-        timer = setTimeout(function(){
+        me.addListener('showpopup', function (type, top, left) {
             if(me.isFocus()){
-
-                if(!menu.toolbarState){
-                    menu.show()
-                }else{
-                    menu.updatePositon()
-                }
-
+                toolbar.show();
             }
-        },800)
+        });
+        me.addListener('hidepopup', function (type, top, left) {
+            toolbar.hide();
+        });
 
-    });
+        $(window).on('scroll', function (type, top, left) {
+            clearTimeout(timer);
+            toolbar.hide();
+            timer = setTimeout(function(){
+                if(me.isFocus()){
+
+                    if(!toolbar.toolbarState){
+                        toolbar.show()
+                    }else{
+                        toolbar.updatePositon()
+                    }
+
+                }
+            },800)
+        });
+
+        me.$body.on('touchmove',function(e){
+            toolbar.hide()
+        });
+    })
 
 };

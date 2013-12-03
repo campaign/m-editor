@@ -53,6 +53,7 @@
     padding: 0px 6px;
     /*border-radius: 3px;*/
     border-top: 1px #a6a6a6 solid;
+    border-bottom: 1px #a6a6a6 solid;
     background-color: #f2f2f2;
     text-align: right;
     -webkit-user-select: none;
@@ -185,4 +186,33 @@
     line-height: 30px;
     background-image: url(./images/toolbar.png);
     background-position: 0px -36px;
+}
+
+/* common */
+.floatleft{
+    float:left;
+}
+.floatright{
+    float:right;
+}
+.pagebar {
+    background: #2b88cf;
+    color: #FFF;
+    line-height: 2.5em;
+    text-align: center;
+}
+.btn {
+    margin: 4px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0px 10px;
+    display: inline-block;
+    border-radius: 3px;
+    background-size: 80% 80%;
+    background-color: #69a2cf;
+    color: #fff;
+    text-decoration: none;
+}
+.btn:hover{
+    background-color: #1869CF;
 }

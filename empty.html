@@ -53,7 +53,13 @@
     <link rel="stylesheet" href="./themes/umeditor.css"/>
 </head>
 <body>
-<h1>移动端富文本编辑器展示页</h1>
+<h1 class="pagebar">
+    移动端富文本编辑器
+    <form action="show.php" id="form" method="post">
+        <input type="hidden" name="content" id="content" class="" />
+        <a class="editor_submit" id="submit" class="floatright btn">提交</a>
+    </form>
+</h1>
 <div style="width:100%;min-height:200px;" class="editor_input" id="editor" ></div>
 <div class="editor_toolbar">
     <form action="show.php" id="form" method="post">
