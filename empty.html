@@ -43,7 +43,7 @@
             box-shadow: 0 0 3px #bfc2c6;
         }
     </style>
-    <script src="zepto.js"></script>
+    <script src="third-party/zepto.js"></script>
     <script src="third-party/gmu/gmu.js"></script>
     <link rel="stylesheet" href="third-party/gmu/gmu.css"/>
 
@@ -54,15 +54,22 @@
 </head>
 <body>
 <h1>移动端富文本编辑器展示页</h1>
-<div style="width:100%;min-height:80px;" class="editor_input" id="editor" >
+<div style="width:100%;min-height:80px;" class="editor_input" id="editor" ></div>
+<div class="editor_toolbar">
+    <form action="show.php" id="form" method="post">
+        <input type="hidden" name="content" id="content" />
+        <a class="editor_submit" id="submit">提交</a>
+    </form>
 </div>
-<div class="editor_toolbar"><a class="editor_submit">提交</a></div>
 
 <script>
     var editor = new UM.Editor();
-
     editor.render('editor')
 
+    $('#submit').click(function(){
+        $('#content').val(editor.getContent());
+        $('#form').submit();
+    });
 </script>
 
 </body>

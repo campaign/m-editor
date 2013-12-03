@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>M-Editor内容展示页</title>
+    <script src="third-party/zepto.js"></script>
     <style>
         .content{
             max-width: 300px;
