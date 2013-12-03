@@ -216,3 +216,14 @@
 .btn:hover{
     background-color: #1869CF;
 }
+.blank{
+    margin: 4px;
+    height: 32px;
+    width: 42px;
+    line-height: 32px;
+    display: inline-block;
+    border-radius: 3px;
+    background-size: 80% 80%;
+    color: #fff;
+    text-decoration: none;
+}

@@ -92,23 +92,19 @@ UM.plugins.toolbar = function(){
         },
         updatePositon: function(){
             /* 设置toolbar的位置 */
-
             var top = me.$body.offset().top;
             if(window.pageYOffset <= top - 47){
-
                 this.$root.css({
                     top: top - 47,// + (/^7/.test($.os.version) ? 210 : 156) - (isShowState ? (/^7/.test($.os.version) ? 35 : 42) : 0),
                     right: 0
                 });
             }else{
-
                 this.$root.css({
                     top: window.pageYOffset,// + (/^7/.test($.os.version) ? 210 : 156) - (isShowState ? (/^7/.test($.os.version) ? 35 : 42) : 0),
                     right: 0,
                     position:'absolute'
                 });
             }
-
         },
         show: function () {
             this.toolbarState = true;

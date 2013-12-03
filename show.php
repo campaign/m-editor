@@ -40,7 +40,7 @@
     <h1 class="pagebar">
         <a class="floatleft btn" href="javascript:history.back();">返回</a>
         内容展示页
-        <a class="editor_submit floatright btn" id="submit">编辑</a>
+        <span class="blank floatright"></span>
     </h1>
     <div class="author">
         <img class="photo" src="http://weditor.duapp.com/php/upload/20131203/13860406433898.jpg" alt="" width="32" heigth="32"/>
