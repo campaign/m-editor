@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <title>M-Editor演示</title>
+    <style>
+        .editor_input {
+            word-wrap: break-word;
+            -webkit-appearance: none;
+            -webkit-border-radius: 3px;
+            width: 100%;
+            padding: 10px;
+            -webkit-box-sizing: border-box;
+            display: block;
+            font-size: 1em;
+            border: 1px solid #c6c6c6;
+            border-bottom: 1px solid #eaeaea;
+            font-weight: 600;
+            color: #999;
+            box-shadow: 0 0 5px #dfdfdf inset;
+            background: #fbfbfb
+        }
+        .editor_input p{
+            margin:0;
+            padding:0;
+        }
+        .editor_toolbar {
+            text-align: right;
+        }
+        .editor_submit {
+            position: relative;
+            right: 0px;
+            margin-top: 4px;
+            padding: 0 10px;
+            line-height: 30px;
+            display: inline-block;
+            text-decoration: none;
+            border: 1px solid #1e84db;
+            background: #2d90e4;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 3px #bfc2c6;
+        }
+    </style>
+    <script src="zepto.js"></script>
+    <script src="third-party/gmu/gmu.js"></script>
+    <link rel="stylesheet" href="third-party/gmu/gmu.css"/>
+
+    <script src="umeditor.config.js"></script>
+    <script src="editor_api.js"></script>
+    <script src="lang/zh-cn/zh-cn.js"></script>
+    <link rel="stylesheet" href="./themes/umeditor.css"/>
+</head>
+<body>
+<h1>移动端富文本编辑器展示页</h1>
+<div style="width:100%;min-height:80px;" class="editor_input" id="editor" >
+</div>
+<div class="editor_toolbar"><a class="editor_submit">提交</a></div>
+
+<script>
+    var editor = new UM.Editor();
+
+    editor.render('editor')
+
+</script>
+
+</body>
+</html>
