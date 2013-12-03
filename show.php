@@ -5,9 +5,6 @@
     <title>M-Editor内容展示页</title>
     <script src="third-party/zepto.js"></script>
     <style>
-        .content{
-            max-width: 300px;
-        }
         .author .photo{
 
         }
@@ -36,6 +33,7 @@
 </head>
 <body>
 <div class="content">
+    <h1>内容展示页</h1>
     <div class="author">
         <img class="photo" src="http://weditor.duapp.com/php/upload/20131203/13860406433898.jpg" alt="" width="32" heigth="32"/>
         <span class="name">Jinqn</span>
