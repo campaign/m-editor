@@ -11,8 +11,8 @@
                     'position': 'fixed',
                     'top': 0,
                     'left': 0,
-                    'width': $(window).width(),
-                    'height': $(window).height()
+                    'width': '100%',
+                    'height': '100%'
                 }).hide();
             this.$root.appendTo(document.body);
             this.$root.on('tap', function(){
@@ -28,12 +28,12 @@
             });
             return this;
         },
-        show: function(slideToIndex){
+        show: function(index){
             var $root = this.$root;
             $root.show().slider({
-                index: slideToIndex || 0,
+                index: index || 0,
                 ready: function () {
-                    $root.find('img').on('load', updataImagePos).each(updataImagePos);
+                    $root.find('img').each(updataImagePos).on('load', updataImagePos);
                     function updataImagePos(){
                         var $img = $(this),
                             marginTop = ($img.parent().height() - $img.height()) / 2;
@@ -52,8 +52,12 @@
     var slider = new Slider();
     $('.item').each(function(i, p){
         var $imgs = $(p).find('.post img');
-        $imgs.click(function(){
-            slider.setImages($imgs).show(i);
+        $imgs.on('click', function(){
+            var target = this, index = 0;
+            $imgs.each(function(k, v){
+                if (v == target) index = k;
+            });
+            slider.setImages($imgs).show(index);
         });
     });
 })()
