@@ -13,7 +13,8 @@
 <body>
 <div class="content">
     <h1 class="pagebar">
-        <a class="floatleft btn" href="javascript:history.back();">返回</a>
+<!--        <a class="floatleft btn" href="javascript:history.back();">返回</a>-->
+        <a class="floatleft btn" href="empty.php">返回</a>
         内容展示页
         <span class="blank floatright"></span>
     </h1>
@@ -55,12 +56,13 @@
             <div class="detail">
                 <span class="time">今天 11:06</span>
                 <a class="comment">评论</a>
+                <a class="delete">删除</a>
                 <span class="clearfix"></span>
             </div>
         </div>
-        <div class="item"> <div class="author"><img class="photo" src="http://weditor.duapp.com/php/upload/20131203/13860406433898.jpg" /> <span class="name">起个很长很长很长的昵称:</span> </div> <div class="post"> m-editor.</div> <div class="detail"> <span class="time">今天 11:05</span> <a class="comment">评论</a> <span class="clearfix"></span> </div> </div>
-        <div class="item"> <div class="author"><img class="photo" src="http://weditor.duapp.com/php/upload/20131203/13860406433898.jpg" /> <span class="name">起个很长很长很长的昵称:</span> </div> <div class="post"> world</div> <div class="detail"> <span class="time">今天 10:02</span> <a class="comment">评论</a> <span class="clearfix"></span> </div> </div>
-        <div class="item"> <div class="author"><img class="photo" src="http://weditor.duapp.com/php/upload/20131203/13860406433898.jpg" /> <span class="name">起个很长很长很长的昵称:</span> </div> <div class="post"> hello</div> <div class="detail"> <span class="time">今天 10:01</span> <a class="comment">评论</a> <span class="clearfix"></span> </div> </div>
+        <div class="item"> <div class="author"><img class="photo" src="http://weditor.duapp.com/php/upload/20131203/13860406433898.jpg" /> <span class="name">起个很长很长很长的昵称:</span> </div> <div class="post"> m-editor.</div> <div class="detail"> <span class="time">今天 11:05</span> <a class="comment">评论</a> <a class="delete">删除</a> <span class="clearfix"></span> </div> </div>
+        <div class="item"> <div class="author"><img class="photo" src="http://weditor.duapp.com/php/upload/20131203/13860406433898.jpg" /> <span class="name">起个很长很长很长的昵称:</span> </div> <div class="post"> world</div> <div class="detail"> <span class="time">今天 10:02</span> <a class="comment">评论</a> <a class="delete">删除</a> <span class="clearfix"></span> </div> </div>
+        <div class="item"> <div class="author"><img class="photo" src="http://weditor.duapp.com/php/upload/20131203/13860406433898.jpg" /> <span class="name">起个很长很长很长的昵称:</span> </div> <div class="post"> hello</div> <div class="detail"> <span class="time">今天 10:01</span> <a class="comment">评论</a> <a class="delete">删除</a> <span class="clearfix"></span> </div> </div>
     </div>
 </div>
 

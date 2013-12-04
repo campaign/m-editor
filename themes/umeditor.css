@@ -256,6 +256,9 @@
     margin:0;
     padding:0;
 }
+.editor_input img{
+    border: 1px solid  #ccc;
+}
 .form{
     display: inline-block;
     float: right;
@@ -293,6 +296,9 @@
     margin:0;
     padding:0;
 }
+.post img{
+    border: 1px solid  #ccc;
+}
 .author .photo{
     width: 30px;
     height: 30px;
@@ -309,8 +315,15 @@
     font-size:12px;
     float:left;
 }
+.detail .delete{
+    font-size:12px;
+    float:right;
+    color:#1665be;
+    margin-left:4px;
+}
 .detail .comment{
     font-size:12px;
     float:right;
     color:#1665be;
+    margin-left:4px;
 }
