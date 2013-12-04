@@ -13,7 +13,7 @@
 <body>
 <div class="content">
     <h1 class="pagebar">
-        <a class="floatleft btn" href="javascript:history.back();">返回</a>
+        <a class="floatleft btn" href="index.php">返回</a>
         内容展示页
         <span class="blank floatright"></span>
     </h1>
