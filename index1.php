@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
-    <title>M-Editor演示</title>
+    <title>手机端富文本编辑器</title>
     <script src="third-party/zepto.js"></script>
     <script src="third-party/gmu/gmu.js"></script>
     <link rel="stylesheet" href="third-party/gmu/gmu.css"/>
@@ -26,8 +26,10 @@
 <div class="editor_container">
     <div style="width:100%;min-height:200px;" class="editor_input" id="editor" >
     </div>
+    <div>
+        <a href="javascript:clear()" class="cleardoc">清空内容</a>
+    </div>
 </div>
-<input type="text"/>
 <script>
     var editor = new UM.Editor();
     editor.render('editor');
@@ -36,6 +38,10 @@
         $('#content').val(editor.getContent());
         $('#form').submit();
     });
+
+    function clear(){
+        editor.setContent('');
+    }
 </script>
 
 </body>
