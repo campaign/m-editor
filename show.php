@@ -14,7 +14,6 @@
 <div class="content">
     <h1 class="pagebar">
         <a class="floatleft btn" href="javascript:history.back();">返回</a>
-<!--        <a class="floatleft btn" href="index.php">返回</a>-->
         内容展示页
         <span class="blank floatright"></span>
     </h1>
@@ -23,7 +22,7 @@
         <div class="item">
             <div class="detail">
                 <div class="floatleft">
-                    <img class="photo" src="http://bs.baidu.com/uploadimg/upload1/17901386132333.png" />
+                    <img class="photo" src="./php/upload/20131203/m-editor.png" />
                 </div>
                 <div class="floatleft">
                     <div><span class="name">手机端富文本编辑器</span></div>
