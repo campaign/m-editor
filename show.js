@@ -60,4 +60,4 @@
             slider.setImages($imgs).show(index);
         });
     });
-})()
+})();
