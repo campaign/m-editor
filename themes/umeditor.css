@@ -235,6 +235,13 @@
 .editor_container{
     margin: 5px;
 }
+.brief{
+    margin: 5px;
+    padding: 2px;
+    color: #666;
+    font-size: 14px;
+    text-indent: 2em;
+}
 .editor_input {
     word-wrap: break-word;
     -webkit-appearance: none;

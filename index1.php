@@ -23,6 +23,9 @@
         <a class="editor_submit floatright btn" id="submit">提交</a>
     </form>
 </h1>
+<div class="brief">
+    简介：创新富文本编辑器，使得用户可以按照自己的思路、表达方式组织UGC内容。
+</div>
 <div class="editor_container">
     <div style="width:100%;min-height:200px;" class="editor_input" id="editor" >
     </div>
