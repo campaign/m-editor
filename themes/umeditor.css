@@ -259,6 +259,9 @@
 .editor_input img{
     border: 1px solid  #ccc;
 }
+.editor_input img.emotion{
+    border: 0px;
+}
 .form{
     display: inline-block;
     float: right;
@@ -298,6 +301,9 @@
 }
 .post img{
     border: 1px solid  #ccc;
+}
+.post img.emotion{
+    border: 0px;
 }
 .author .photo{
     width: 30px;

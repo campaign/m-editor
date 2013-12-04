@@ -9,7 +9,7 @@ UM.plugins.cursor = function(){
         return offset;
     }
     me.addListener('focus',function(e){
-        me.fireEvent('showpopup')
+        me.fireEvent('showpopup', true);
     });
 //    me.addListener('blur',function(e){
 //        me.fireEvent('hidepopup')

@@ -147,8 +147,8 @@ UM.plugins.toolbar = function(){
         var timer,
             toolbar = toolbar || new Toolbar();
 
-        me.addListener('showpopup', function (type, top, left) {
-            if(me.isFocus()){
+        me.addListener('showpopup', function (type, isFireByFocus) {
+            if(isFireByFocus || me.isFocus()){
                 toolbar.show();
             }
         });
