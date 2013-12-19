@@ -1,7 +1,8 @@
 UM.commands['insertimages'] = {
     execCommand: function (command,images){
         var me = this,
-            rng = me.selection.getRange(),start;
+            rng = me.selection.getRange(),start,
+            bookmark = rng.createBookmark();
 
         function createImgsHtml(images){
             var html = [];
@@ -24,7 +25,8 @@ UM.commands['insertimages'] = {
         start = getPreImg(rng.startContainer.childNodes[rng.startOffset]||rng.startContainer.childNodes[rng.startOffset-1]);
         if(start && start.nodeName != 'IMG'){
             me.fireEvent('beforeinserthtml');
-            var bk = rng.createBookmark();
+            // var bk = rng.createBookmark();
+            var bk = bookmark;
             domUtils.breakParent(bk.start,rng.startContainer);
             var $newline = $('<p><br/></p>');
             $newline.insertBefore(bk.start);
@@ -34,6 +36,7 @@ UM.commands['insertimages'] = {
         }else{
             me.execCommand('insertHtml',createImgsHtml(images))
         }
+
 
     }
 };
