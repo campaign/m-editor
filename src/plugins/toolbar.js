@@ -72,7 +72,7 @@ UM.plugins.toolbar = function(){
             $root.find('.edui-btn-emotion').click(function(){
                 var holderId = '_me_emotion_' + (+new Date());
                 me.execCommand('insertHtml', '<span id="'+holderId+'" style="width:20px;height:20px;border:1px solid #ccc;display:inline-block"></span>',false,true);
-alert('emotion');
+
                 $('<img src="http://bs.baidu.com/uploadimg/86961384265701.gif" style="display:none;"/>').appendTo(document.body)
                     .on('load',function(){
 
