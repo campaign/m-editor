@@ -28,11 +28,13 @@ UM.plugins.toolbar = function(){
 
             $root.find('.edui-btn-photo input[type=file],.edui-btn-camera input[type=file]').change(function(e){
 
-                var fileList = e.target.files,spans=[];
+                var fileList = e.target.files,spans=[],
+                    holderId = '_me_image_' + (+new Date());
+
                 if(fileList) {
                     $.each(fileList, function (i, f) {
                         spans.push({
-                            id:'_me_image',
+                            id:holderId,
                             'style':'width:60px;height:60px;border:1px solid #ccc;margin-right:2px;display:inline-block;'
                         })
                     });
@@ -45,8 +47,8 @@ UM.plugins.toolbar = function(){
                     if(picLink) {
                         $('<img src="'+picLink+'" style="display:none;"/>').appendTo(document.body)
                             .on('load',function(){
-                                $('<img class="slider" src="'+this.src+'" style="width:60px;height:60px;margin-right:2px;"/>').insertBefore($('#_me_image',me.document))
-                                $('#_me_image',me.document).remove();
+                                $('<img class="slider" src="'+this.src+'" style="width:60px;height:60px;margin-right:2px;"/>').insertBefore($('#'+holderId,me.document))
+                                $('#'+holderId,me.document).remove();
                                 $(this).remove();
                                 me.blur();
                             })
@@ -68,13 +70,14 @@ UM.plugins.toolbar = function(){
             });
 
             $root.find('.edui-btn-emotion').click(function(){
-                me.execCommand('insertHtml', '<span id="_me_emotion" style="width:20px;height:20px;border:1px solid #ccc;display:inline-block"></span>',false,true);
+                var holderId = '_me_emotion_' + (+new Date());
+                me.execCommand('insertHtml', '<span id="'+holderId+'" style="width:20px;height:20px;border:1px solid #ccc;display:inline-block"></span>',false,true);
 
                 $('<img src="http://bs.baidu.com/uploadimg/86961384265701.gif" style="display:none;"/>').appendTo(document.body)
                     .on('load',function(){
 
-                        var $img = $('<img class="emotion" src="http://bs.baidu.com/uploadimg/86961384265701.gif" />').insertBefore($('#_me_emotion',me.document));
-                        $('#_me_emotion',me.document).remove();
+                        var $img = $('<img class="emotion" src="http://bs.baidu.com/uploadimg/86961384265701.gif" />').insertBefore($('#'+holderId,me.document));
+                        $('#'+holderId,me.document).remove();
                         $(this).remove();
 
                         me.selection.getRange().setStartAfter($img[0]).collapse(true).select();
@@ -158,7 +161,7 @@ UM.plugins.toolbar = function(){
 
         $(window).on('scroll', function (type, top, left) {
             clearTimeout(timer);
-            toolbar.hide();
+//            toolbar.hide();
             timer = setTimeout(function(){
                 if(me.isFocus()){
 
@@ -169,7 +172,7 @@ UM.plugins.toolbar = function(){
                     }
 
                 }
-            },800)
+            },300)
         });
 
         me.$body.on('touchmove',function(e){
