@@ -15,8 +15,10 @@
                     'height': '100%'
                 }).hide();
             this.$root.appendTo(document.body);
-            this.$root.on('tap', function(){
+            this.$root.on('click', function(e){
                 _this.hide();
+                domUtils.preventDefault(e);
+                return false;
             });
             return this;
         },
