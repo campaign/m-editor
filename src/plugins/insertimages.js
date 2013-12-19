@@ -32,7 +32,6 @@ UM.commands['insertimages'] = {
             rng.moveToBookmark(bk).setEndAfter($newline[0]).collapse().select();
             me.fireEvent('afterinserthtml');
         }else{
-            end = end ? end.nextSibling:start.nextSibling;
             me.execCommand('insertHtml',createImgsHtml(images));
 //            domUtils.breakParent(bk.start,rng.startContainer);
 //            rng.moveToBookmark(bk).setEndAfter(end).collapse().select();
