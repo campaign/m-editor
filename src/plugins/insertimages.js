@@ -2,7 +2,7 @@ UM.commands['insertimages'] = {
     execCommand: function (command,images){
         var me = this,
             rng = me.selection.getRange(),start,
-            bookmark = rng.createBookmark();
+            bk = rng.createBookmark();
 
         function createImgsHtml(images){
             var html = [];
@@ -22,19 +22,20 @@ UM.commands['insertimages'] = {
             return node;
         }
         rng.txtToElmBoundary(true);
-        start = getPreImg(rng.startContainer.childNodes[rng.startOffset]||rng.startContainer.childNodes[rng.startOffset-1]);
+//        start = getPreImg(rng.startContainer.childNodes[rng.startOffset]||rng.startContainer.childNodes[rng.startOffset-1]);
+        start = bk.start.previousSibling;
         if(start && start.nodeName != 'IMG'){
             me.fireEvent('beforeinserthtml');
-            // var bk = rng.createBookmark();
-            var bk = bookmark;
             domUtils.breakParent(bk.start,rng.startContainer);
             var $newline = $('<p><br/></p>');
             $newline.insertBefore(bk.start);
             $newline.html(createImgsHtml(images));
-            rng.moveToBookmark(bk).setStartAtLast($newline[0]).setCursor(false,true);
+            rng.moveToBookmark(bk).setEndAfter($newline[0]).collapse().select();
             me.fireEvent('afterinserthtml');
         }else{
-            me.execCommand('insertHtml',createImgsHtml(images))
+            me.execCommand('insertHtml',createImgsHtml(images));
+//            domUtils.breakParent(bk.start,rng.startContainer);
+//            rng.moveToBookmark(bk).setEndAfter($newline[0]).collapse().select();
         }
 
 
