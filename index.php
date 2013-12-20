@@ -19,8 +19,8 @@
     <span class="blank floatleft"></span>
     移动端富文本编辑器
     <form action="show.php" class="form" id="form" method="post">
-    <input type="hidden" name="content" id="content" class="" />
-    <a class="editor_submit floatright btn" id="submit">提交</a>
+        <input type="hidden" name="content" id="content" class="" />
+        <a class="editor_submit floatright btn" id="submit">提交</a>
     </form>
 </h1>
 <div class="brief">
