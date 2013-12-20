@@ -40,14 +40,11 @@ UM.commands['insertimages'] = {
             var $newline = $('<p><br/></p>');
             $newline.insertBefore(bk.start);
             $newline.html(createImgsHtml(images));
-            rng.moveToBookmark(bk).setEndAfter($newline[0]).collapse().select();
+            rng.moveToBookmark(bk).setEndAfter($newline[0]).collapse();
+
             me.fireEvent('afterinserthtml');
         }else{
             me.execCommand('insertHtml',createImgsHtml(images));
-//            domUtils.breakParent(bk.start,rng.startContainer);
-//            rng.moveToBookmark(bk).setEndAfter(end).collapse().select();
         }
-
-
     }
 };
