@@ -33,18 +33,22 @@ UM.commands['insertimages'] = {
             return node;
         }
         rng.txtToElmBoundary(true);
+
         start = bk.start.previousSibling;
+        if(domUtils.isBookmarkNode(start)){
+            start = start.previousSibling;
+        }
         if(start && start.nodeName != 'IMG'){
             me.fireEvent('beforeinserthtml');
             domUtils.breakParent(bk.start,rng.startContainer);
             var $newline = $('<p><br/></p>');
             $newline.insertBefore(bk.start);
             $newline.html(createImgsHtml(images));
-            rng.moveToBookmark(bk).setEndAfter($newline[0]).collapse();
-
+            rng.moveToBookmark(bk).setEndAfter($newline[0]).collapse().select();
             me.fireEvent('afterinserthtml');
         }else{
             me.execCommand('insertHtml',createImgsHtml(images));
+
         }
     }
 };
