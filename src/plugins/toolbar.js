@@ -14,7 +14,7 @@ UM.plugins.toolbar = function(){
             this.$root.html('<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-photo"><input type="file" name="photo" id="photo" accept="image/*" multiple="multiple" /></span></a>' +
                 '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-camera"><input type="file" name="camera" id="camera" accept="image/*" /></span></a>' +
                 '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-emotion"></span></a>' +
-                '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-record"></span></a>' +
+                '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-record"><input type="file" name="camera" id="camera" accept="audio/*" /></span></a>' +
                 '<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-remind"></span></a>');
         },
         initEvent: function(){
@@ -51,9 +51,11 @@ UM.plugins.toolbar = function(){
                                 $('#'+holderId,me.document).remove();
                                 $(this).remove();
                                 me.blur();
-                            })
+                            });
                     }
                 });
+
+                e.target.value = null;
                 me.blur();
             });
 
@@ -81,14 +83,13 @@ UM.plugins.toolbar = function(){
                         $(this).remove();
 
                         me.selection.getRange().setStartAfter($img[0]).collapse(true).select();
-                        setTimeout(function(){
-                            window.scrollTo(0,$img.offset().top -100)
-                        })
+//                        setTimeout(function(){
+//                            window.scrollTo(0,$img.offset().top -100)
+//                        })
 
                     });
 
             });
-            $root.find('.edui-btn-record').click(function(){ });
             $root.find('.edui-btn-remind').click(function(){
                 me.execCommand('inserthtml', '<a href="http://tieba.baidu.com/home/main?un=ueditor">@ueditor</a>&nbsp;');
             });
