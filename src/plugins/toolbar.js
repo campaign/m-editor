@@ -35,7 +35,7 @@ UM.plugins.toolbar = function(){
                     $.each(fileList, function (i, f) {
                         spans.push({
                             id:holderId,
-                            'style':'width:60px;height:60px;border:1px solid #ccc;margin-right:2px;display:inline-block;'
+                            'style':'width:60px;height:60px;border:1px solid #ccc;margin-right:2px;padding:0;marigin:0'
                         })
                     });
                     me.execCommand('insertimages', spans);
