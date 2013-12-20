@@ -159,6 +159,17 @@ UM.plugins.toolbar = function(){
             toolbar.hide();
         });
 
+        me.addListener('keyup',function(){
+            if(me.isFocus()){
+
+                if(!toolbar.toolbarState){
+                    toolbar.show()
+                }else{
+                    toolbar.updatePositon()
+                }
+
+            }
+        })
         $(window).on('scroll', function (type, top, left) {
             clearTimeout(timer);
 //            toolbar.hide();
