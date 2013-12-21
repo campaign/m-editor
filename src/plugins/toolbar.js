@@ -183,9 +183,10 @@ UM.plugins.toolbar = function(){
                 }
             },300)
         });
-
-        me.$body.on('touchmove',function(e){
-            toolbar.hide()
+        me.$body.on('touchstart',function(){
+            if(me.body.contentEditable == 'false'){
+                me.body.contentEditable = 'true';
+            }
         });
 
         me.addListener('blur', function(e){

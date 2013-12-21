@@ -552,7 +552,7 @@
             var me = this,
                 range = me.selection.getRange();
             me._bakRange = range;
-            $('<input type="hidden">').css({position:'absolute', top:window.pageY+10,left:10, zIndex: -2}).appendTo(document.body).focus().remove();
+            me.body.contentEditable = 'false';
 
 //            this.fireEvent('blur');
         },
