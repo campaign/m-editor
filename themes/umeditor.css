@@ -270,10 +270,11 @@
     border: 0px;
 }
 .editor_input img.audio{
-    width:126px;
-    height:45px;
-    line-height: 45px;
-    background: url("images/audio.png");
+    width:113px;
+    height:55px;
+    line-height: 55px;
+    background-image: url("images/audio_pause.gif");
+    background-size: 100% 100%;
     border: 0px;
 }
 .editor_input audio{
@@ -323,11 +324,15 @@
     border: 0px;
 }
 .post img.audio{
-    width:126px;
-    height:45px;
-    line-height: 45px;
-    background-image: url("images/audio.png");
+    width:113px;
+    height:55px;
+    line-height: 55px;
+    background-image: url("images/audio_pause.gif");
+    background-size: 100% 100%;
     border: 0px;
+}
+.post img.audio_playing{
+    background-image: url("images/audio_playing.gif");
 }
 .post audio{
     width:126px;
