@@ -276,6 +276,8 @@
     background-image: url("images/audio_pause.png");
     background-size: 100% 100%;
     border: 0px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
 }
 .editor_input audio{
     width:126px;
@@ -330,9 +332,14 @@
     background-image: url("images/audio_pause.png");
     background-size: 100% 100%;
     border: 0px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
 }
 .post img.audio_playing{
     background-image: url("images/audio_playing.gif");
+}
+.post img.audio_press{
+    background-image: url("images/audio_press.png");
 }
 .post audio{
     width:126px;

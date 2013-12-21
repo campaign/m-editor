@@ -56,6 +56,7 @@
         //设置幻灯片
         var $imgs = $(p).find('.post img').not('.audio,.emotion');
         $imgs.on('click', function(){
+            pauseAllAudio();
             var target = this, index = 0;
             $imgs.each(function(k, v){
                 if (v == target) index = k;
@@ -69,15 +70,21 @@
                 $audio = $('<audio src='+$img.attr('_src')+' controls="controls" style="display:none;height:0px;width:0px;padding:0;margin:0;"></audio>');
 
             $audio.insertAfter($img);
-            $img.on('click', function(){
+            $img.on('touchstart', function(){
+                $img.addClass('audio_press');
+            });
+            $img.on('touchend', function(){
+                $img.removeClass('audio_press');
+
                 var status = $img.attr('data-status'),
                     audio = $audio[0];
                 if($img.hasClass('audio_playing')) {
                     audio.pause();
                     $img.removeClass('audio_playing');
                 } else {
-                    audio.play();
+                    pauseAllAudio();
                     audio.currentTime = 0;
+                    audio.play();
                     $img.addClass('audio_playing');
                 }
                 $audio.on('pause', function(){
@@ -85,5 +92,31 @@
                 });
             });
         });
+    });
+
+    //让所有音频暂停
+    function pauseAllAudio(){
+        try{
+            $('.item img.audio').removeClass('audio_playing');
+            $('.item audio').each(function(k, v){
+                v.pause();
+            });
+        } catch(e){}
+    }
+    //预加载图片
+    function preloadImages(links){
+        links = $.isArray(links) ? links:[link];
+        $.each(links, function(k, v){
+            $('<img src="'+v+'" style="display:none;" />').on('load', function(){
+                $(this).remove();
+            }).appendTo(document.body);
+        });
+    }
+
+    $(function(){
+        preloadImages([
+            'themes/images/audio_press.png',
+            'themes/images/audio_playing.gif'
+        ]);
     });
 })();
