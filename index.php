@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <!--<script src="http://172.21.204.88:8081/target/target-script-min.js"></script>-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
     <title>手机端富文本编辑器</title>
@@ -30,6 +31,9 @@
     <div style="width:100%;min-height:200px;" class="editor_input" id="editor" >
         <p >
             起初，我们几个人都感受到目前的ugc方式满足不了我们的需求。发出帖子后经常发现读我们帖子的读者不能够很好地感知到我们发帖者的心情而产生共鸣。于是我们三个人坐在一起讨论是不是有更好的技术、更好的设计可以解决这个问题：
+        </p>
+        <p>
+            <img src="themes/images/holder.png" controls="controls" style="width:126px;height:45px;" _src="http://bs.baidu.com/editor/forever.mp3" class="audio">
         </p>
         <p >
             <img src="http://bs.baidu.com/editor/13860393054882.png" style="width: 60px;height: 60px;margin-right: 2px"/><img src="http://bs.baidu.com/editor/13860393183683.png" style="font-size: 1em;width: 60px;height: 60px;margin-right: 2px"/>

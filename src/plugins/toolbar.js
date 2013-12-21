@@ -65,7 +65,7 @@ UM.plugins.toolbar = function(){
                     $('#message').html('response: ' + data);
                     var musicLink = me.getOpt('uploadPath') + data;
                     if(musicLink) {
-                        me.execCommand('inserthtml', '<p><audio src="' + musicLink + '" controls="controls" style="width:126px;">浏览器不支持audio标签</audio></p>');
+                        me.execCommand('inserthtml', '<p><audio src="' + musicLink + '" controls="controls"></audio></p>');
                     }
                 });
                 me.blur();

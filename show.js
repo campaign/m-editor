@@ -53,7 +53,7 @@
 
     var slider = new Slider();
     $('.item').each(function(i, p){
-        var $imgs = $(p).find('.post img');
+        var $imgs = $(p).find('.post img').not('.audio,.emotion');
         $imgs.on('click', function(){
             var target = this, index = 0;
             $imgs.each(function(k, v){
