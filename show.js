@@ -53,6 +53,7 @@
 
     var slider = new Slider();
     $('.item').each(function(i, p){
+        //设置幻灯片
         var $imgs = $(p).find('.post img').not('.audio,.emotion');
         $imgs.on('click', function(){
             var target = this, index = 0;
@@ -60,6 +61,26 @@
                 if (v == target) index = k;
             });
             slider.setImages($imgs).show(index);
+        });
+        //设置音频按钮点击播放
+        var $audioImgs = $(p).find('.post img.audio');
+        $audioImgs.each(function(k, v){
+            var $img = $(v),
+                $audio = $('<audio src='+$img.attr('_src')+' controls="controls" style="display:none;height:0px;width:0px;padding:0;margin:0;"></audio>');
+
+            $audio.insertAfter($img);
+            $img.on('click', function(){
+                var status = $img.attr('data-status'),
+                    audio = $audio[0];
+                if($img.hasClass('audio_playing')) {
+                    audio.pause();
+                    $img.removeClass('audio_playing');
+                } else {
+                    audio.play();
+                    audio.currentTime = 0;
+                    $img.addClass('audio_playing');
+                }
+            });
         });
     });
 })();

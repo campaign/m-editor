@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <!--<script src="http://172.21.204.88:8081/target/target-script-min.js"></script>-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
     <title>手机端富文本编辑器</title>
