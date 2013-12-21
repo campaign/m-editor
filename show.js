@@ -80,6 +80,9 @@
                     audio.currentTime = 0;
                     $img.addClass('audio_playing');
                 }
+                $audio.on('pause', function(){
+                    $img.removeClass('audio_playing');
+                });
             });
         });
     });

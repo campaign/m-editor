@@ -84,10 +84,6 @@ UM.plugins.toolbar = function(){
                         $(this).remove();
 
                         me.selection.getRange().setStartAfter($img[0]).collapse(true).select();
-//                        setTimeout(function(){
-//                            window.scrollTo(0,$img.offset().top -100)
-//                        })
-
                     });
 
             });
