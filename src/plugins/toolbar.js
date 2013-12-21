@@ -68,6 +68,7 @@ UM.plugins.toolbar = function(){
                         me.execCommand('inserthtml', '<p><audio src="' + musicLink + '" controls="controls"></audio></p>');
                     }
                 });
+                e.target.value = null;
                 me.blur();
             });
 
