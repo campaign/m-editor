@@ -215,6 +215,8 @@
     background-color: #69a2cf;
     color: #fff;
     text-decoration: none;
+    /*-webkit-tap-highlight-color: rgba(0,0,0,0);*/
+    /*-webkit-user-select: none;*/
 }
 .btn:hover{
     background-color: #1869CF;
