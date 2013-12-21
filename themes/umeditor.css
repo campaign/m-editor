@@ -270,10 +270,10 @@
     border: 0px;
 }
 .editor_input img.audio{
-    width:113px;
-    height:55px;
-    line-height: 55px;
-    background-image: url("images/audio_pause.gif");
+    width:126px;
+    height:40px;
+    line-height: 40px;
+    background-image: url("images/audio_pause.png");
     background-size: 100% 100%;
     border: 0px;
 }
@@ -324,10 +324,10 @@
     border: 0px;
 }
 .post img.audio{
-    width:113px;
-    height:55px;
-    line-height: 55px;
-    background-image: url("images/audio_pause.gif");
+    width:126px;
+    height:40px;
+    line-height: 40px;
+    background-image: url("images/audio_pause.png");
     background-size: 100% 100%;
     border: 0px;
 }
