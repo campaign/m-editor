@@ -65,7 +65,7 @@ UM.plugins.toolbar = function(){
                     $('#message').html('response: ' + data);
                     var musicLink = me.getOpt('uploadPath') + data;
                     if(musicLink) {
-                        me.execCommand('inserthtml', '<audio src="' + musicLink + '" controls="controls" style="width:100px;">浏览器不支持audio标签</audio>');
+                        me.execCommand('inserthtml', '<p><audio src="' + musicLink + '" controls="controls" style="width:126px;">浏览器不支持audio标签</audio></p>');
                     }
                 });
                 me.blur();
@@ -73,12 +73,12 @@ UM.plugins.toolbar = function(){
 
             $root.find('.edui-btn-emotion').click(function(){
                 var holderId = '_me_emotion_' + (+new Date());
-                me.execCommand('insertHtml', '<span id="'+holderId+'" style="width:20px;height:20px;border:1px solid #ccc;display:inline-block"></span>',false,true);
+                me.execCommand('insertHtml', '<span id="'+holderId+'" style="width:24px;height:24px;border:1px solid #ccc;display:inline-block"></span>',false,true);
 
-                $('<img src="http://bs.baidu.com/uploadimg/86961384265701.gif" style="display:none;"/>').appendTo(document.body)
+                $('<img src="http://bs.baidu.com/editor/smile.png" style="display:none;"/>').appendTo(document.body)
                     .on('load',function(){
 
-                        var $img = $('<img class="emotion" src="http://bs.baidu.com/uploadimg/86961384265701.gif" />').insertBefore($('#'+holderId,me.document));
+                        var $img = $('<img class="emotion" src="http://bs.baidu.com/editor/smile.png" />').insertBefore($('#'+holderId,me.document));
                         $('#'+holderId,me.document).remove();
                         $(this).remove();
 

@@ -269,6 +269,20 @@
 .editor_input img.emotion{
     border: 0px;
 }
+.editor_input audio{
+    width:126px;
+    height:45px;
+    opacity: 0.3;
+    line-height: 45px;
+    background: url("images/audio.png");
+}
+.editor_input audio:after{
+    content:url("images/audio.png");
+    width:126px;
+    height:45px;
+    margin-right: -126px;
+    background: url("images/audio.png");
+}
 .form{
     display: inline-block;
     float: right;
@@ -311,6 +325,12 @@
 }
 .post img.emotion{
     border: 0px;
+}
+.post audio{
+    width:126px;
+    height:45px;
+    opacity: 0;
+    background: url("images/audio.png");
 }
 .detail .photo{
     width: 39px;

@@ -17,7 +17,7 @@
             this.$root.appendTo(document.body);
             this.$root.on('click', function(e){
                 _this.hide();
-                domUtils.preventDefault(e);
+                e.preventDefault();
                 return false;
             });
             return this;
