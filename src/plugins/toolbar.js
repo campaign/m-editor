@@ -74,7 +74,7 @@ UM.plugins.toolbar = function(){
 
             $root.find('.edui-btn-emotion').click(function(){
                 var holderId = '_me_emotion_' + (+new Date());
-                me.execCommand('insertHtml', '<span id="'+holderId+'" style="width:24px;height:24px;border:0px solid #ccc;display:inline-block"></span>',false,true);
+                me.execCommand('insertHtml', '<img id="'+holderId+'" style="width:24px;height:24px;border:0px solid #ccc;" src="'+UM.imgData+'"/>',false,true);
 
                 $('<img src="http://bs.baidu.com/editor/smile.png" style="display:none;"/>').appendTo(document.body)
                     .on('load',function(){
