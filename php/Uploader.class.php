@@ -102,6 +102,16 @@ class Uploader
         if ( $this->stateInfo == $this->stateMap[ 0 ] ) {
             if ( !move_uploaded_file( $file[ "tmp_name" ] , $this->fullName ) ) {
                 $this->stateInfo = $this->getStateInfo( "MOVE" );
+            } else {
+                try {
+                    if(in_array($this->getFileExt(), array('.mov', '.avi', '.mp4', '.flv'))) {
+                        $newFullName = $this->fullName.".mp3";
+                        @exec("./ffmpeg -i ".$this->fullName." ".$newFullName);
+                        if(file_exists($newFullName)) {
+                            $this->fullName = $newFullName;
+                        }
+                    }
+                } catch (Exception $e) {}
             }
         }
     }
