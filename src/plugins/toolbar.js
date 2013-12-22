@@ -8,7 +8,7 @@ UM.plugins.toolbar = function(){
     Toolbar.prototype = {
         init: function(){
             /* 初始化俩个dom元素 */
-            this.$root = $('<div class="edui-toolbar" style="position:fixed;">').hide().appendTo(me.document.body);
+            this.$root = $('<div class="edui-toolbar" style="position:fixed;z-index: 10000;">').hide().appendTo(me.document.body);
 
             /* 初始化toolbar */
             this.$root.html('<a href="javascript:void(0)" class="edui-btn"><span class="edui-btn-photo"><input type="file" name="photo" id="photo" accept="image/*" multiple="multiple" /></span></a>' +
@@ -30,6 +30,8 @@ UM.plugins.toolbar = function(){
 
                 var fileList = e.target.files,spans=[],
                     holderId = '_me_image_' + (+new Date());
+
+                $('.cover').remove();
 
                 if(fileList) {
                     $.each(fileList, function (i, f) {
@@ -58,7 +60,17 @@ UM.plugins.toolbar = function(){
 
                 e.target.value = null;
                 me.blur();
-            });
+            }).on('click', function(){
+                    $('<div class="cover" style="position:absolute;opacity: 0.5;background-color:#666;background-image: url(./themes/images/loading.gif);background-position: center center;background-repeat: no-repeat;">' +
+                        '</div>').css({
+                            width: me.$body.width(),
+                            height: me.$body.height(),
+                            top: me.$body.offset().top,
+                            left: me.$body.offset().left
+                        }).appendTo(document.body).on('click', function(){
+                            $(this).remove();
+                        });
+                });;
 
             $root.find('.edui-btn-record input[type=file]').change(function(e){
                 sendFile(e, function(xhr){
