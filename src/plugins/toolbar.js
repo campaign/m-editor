@@ -61,7 +61,7 @@ UM.plugins.toolbar = function(){
                 e.target.value = null;
                 me.blur();
             }).on('click', function(){
-                    $('<div class="cover" style="position:absolute;opacity: 0.5;background-color:#666;background-image: url(./themes/images/loading.gif);background-position: center center;background-repeat: no-repeat;">' +
+                    $('<div class="cover" style="position:absolute;opacity: 0.5;background-color:#666;background-image: url(./themes/images/loading1.gif);background-position: center center;background-repeat: no-repeat;">' +
                         '</div>').css({
                             width: me.$body.width(),
                             height: me.$body.height(),
