@@ -552,7 +552,7 @@
             var me = this,
                 range = me.selection.getRange();
             me._bakRange = range;
-            me.body.contentEditable = 'false';
+//            me.body.contentEditable = 'false';
 
 //            this.fireEvent('blur');
         },

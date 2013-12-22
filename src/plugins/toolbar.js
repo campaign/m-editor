@@ -183,11 +183,11 @@ UM.plugins.toolbar = function(){
                 }
             },300)
         });
-        me.$body.on('touchstart',function(){
-            if(me.body.contentEditable == 'false'){
-                me.body.contentEditable = 'true';
-            }
-        });
+//        me.$body.on('touchstart',function(){
+//            if(me.body.contentEditable == 'false'){
+//                me.body.contentEditable = 'true';
+//            }
+//        });
 
         me.addListener('blur', function(e){
             try{
