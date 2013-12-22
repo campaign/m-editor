@@ -11,7 +11,7 @@ UM.commands['insertimages'] = {
                 $.each(img,function(k,v){
                     attrs.push(' ' + k + '="' + v + '"');
                 });
-                html.push('<img  src="'+UM.imgData+'"'
+                html.push('<img  src="./themes/images/loading.gif"'
                 + attrs.join(' ') + ' />')
             })
             return html.join('') + ''
