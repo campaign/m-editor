@@ -40,6 +40,7 @@ UM.plugins.toolbar = function(){
                     });
                     me.execCommand('insertimages', spans);
                 }
+                me.toolbar && me.toolbar.updatePositon();
                 sendFile(e, function(xhr){
                     var data = xhr.responseText;
                     $('#message').html('response: ' + data);
@@ -148,6 +149,7 @@ UM.plugins.toolbar = function(){
         var timer,
             toolbar = toolbar || new Toolbar();
 
+        me.toolbar = toolbar;
         me.addListener('showpopup', function (type, isFireByFocus) {
             if(isFireByFocus || me.isFocus()){
                 toolbar.show();
